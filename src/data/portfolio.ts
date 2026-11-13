@@ -1,5 +1,5 @@
 /**
- * Central portfolio data — generated from Rayyan's resume (Rayyan_dasari.pdf).
+ * Central portfolio profile data. Resume content lives in data/resume.ts.
  * Every fact on the site comes from this file. Update it here and the whole site follows.
  * Nothing here should be added unless it appears on the resume.
  */
@@ -8,7 +8,7 @@ export type Palette = { from: string; via: string; to: string; accent: string };
 
 export const profile = {
   fullName: 'Dasari Venkata Ratna Sri Rayyan',
-  displayName: 'Rayyan Ali
+  displayName: 'Rayyan Ali',
   firstName: 'Rayyan',
   seriesTag: 'THE SERIES',
   /** Fictional studio card shown at the very start of the opening sequence. */
@@ -27,7 +27,7 @@ export const profile = {
   portrait: {
     src: '/assets/portrait-720.webp',
     srcSet: '/assets/portrait-420.webp 420w, /assets/portrait-720.webp 720w, /assets/portrait-1100.webp 1100w',
-    alt: 'Portrait of Rayyan Ali
+    alt: 'Portrait of Rayyan Ali',
   },
   interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
 };

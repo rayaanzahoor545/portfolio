@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { achievements, certifications, education, experience, profile, projects, skillCategories } from '../data/portfolio';
+import { resume } from '../data/resume';
 import { EASE, Magnetic, SectionHeading } from './fx';
 
 /** THE FULL STORY — a designed resume preview plus view / download actions. */
@@ -20,9 +20,9 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
         </motion.div>
 
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="font-serif text-3xl italic leading-tight text-bone">Every episode, on one page.</p>
+          <p className="font-serif text-3xl italic leading-tight text-bone">Turning data into decisions.</p>
           <p className="mt-3 text-sm leading-relaxed text-mist">
-            Education, training, projects, achievements and {certifications.length} certifications — view it here or take a copy with you.
+            Resume tailored for Data Analyst and Business Analyst roles, with experience across analytics, reporting, and business intelligence.
           </p>
           <div className="mt-6 flex flex-col gap-3">
             <Magnetic className="w-full">
@@ -37,8 +37,8 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
             </Magnetic>
             <Magnetic className="w-full">
               <a
-                href={profile.resumePdf}
-                download="Rayyan_Dasari_Resume.pdf"
+                href={resume.pdf}
+                download="Rayyan_Ali_Data-Analyst_Resume.pdf"
                 data-cursor="link"
                 className="glass flex min-h-12 w-full items-center justify-center gap-2 rounded-md px-6 text-[15px] font-semibold text-bone transition hover:bg-white/15"
               >
@@ -47,14 +47,10 @@ export default function ResumeSection({ onView }: { onView: () => void }) {
             </Magnetic>
           </div>
           <dl className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-xl bg-white/10 text-center">
-            {[
-              { v: education[0].score.replace('CGPA ', ''), k: 'CGPA' },
-              { v: String(projects.length), k: 'Originals' },
-              { v: String(certifications.length), k: 'Certs' },
-            ].map((s) => (
-              <div key={s.k} className="bg-ink-2 px-2 py-4">
-                <dd className="font-display text-3xl leading-none text-bone">{s.v}</dd>
-                <dt className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-smoke">{s.k}</dt>
+            {resume.highlights.map((s) => (
+              <div key={s.label} className="bg-ink-2 px-2 py-4">
+                <dd className="font-display text-3xl leading-none text-bone">{s.value}</dd>
+                <dt className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-smoke">{s.label}</dt>
               </div>
             ))}
           </dl>
@@ -93,49 +89,41 @@ export function ResumeSheet() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-crimson-2/70 to-transparent" />
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-6">
         <div>
-          <p className="text-[10px] font-bold tracking-[0.34em] text-smoke">STARRING</p>
-          <h3 className="mt-1 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[0.9] tracking-wide text-bone">{profile.fullName}</h3>
+          <h3 className="font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[0.9] tracking-wide text-bone">{resume.fullName}</h3>
+          <p className="mt-2 text-sm font-semibold text-crimson-2">{resume.headline}</p>
         </div>
         <div className="text-xs leading-relaxed text-mist sm:text-right">
-          <a href={`mailto:${profile.email}`} className="block hover:text-bone">
-            {profile.email}
+          <p>{resume.location} · {resume.phone}</p>
+          <a href={`mailto:${resume.email}`} className="block hover:text-bone">
+            {resume.email}
           </a>
-          <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-bone">
+          <a href={resume.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-bone">
             LinkedIn ↗
           </a>
           {' · '}
-          <a href={profile.links.github} target="_blank" rel="noreferrer" className="hover:text-bone">
-            GitHub ↗
+          <a href={resume.links.github} target="_blank" rel="noreferrer" className="hover:text-bone">
+            GitHub Portfolio ↗
           </a>
         </div>
       </header>
 
+      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.3em] text-smoke">
+        {resume.availability} · {resume.english}
+      </p>
+      <p className="mb-6 text-xs leading-relaxed text-mist">{resume.summary}</p>
+
       <div className="grid gap-x-10 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <H>Education</H>
-          {education.map((e) => (
-            <div key={e.school} className="mb-4">
-              <div className="flex flex-wrap justify-between gap-x-3">
-                <p className="text-sm font-semibold text-bone">
-                  {e.school}, {e.place}
-                </p>
-                <p className="text-xs text-smoke">{e.period}</p>
-              </div>
-              <p className="text-xs text-mist">
-                {e.degree} · <span className="text-bone/80">{e.score}</span>
-              </p>
-            </div>
-          ))}
-
           <H>Work Experience</H>
-          {experience.map((x) => (
-            <div key={x.company}>
+          {resume.experience.map((x) => (
+            <div key={x.company} className="mb-5">
               <div className="flex flex-wrap justify-between gap-x-3">
                 <p className="text-sm font-semibold text-bone">
-                  {x.company} — {x.role}
+                  {x.role} — {x.company}
                 </p>
                 <p className="text-xs text-smoke">{x.period}</p>
               </div>
+              <p className="mt-1 text-xs text-smoke">{x.place}</p>
               <ul className="mt-2 space-y-1.5">
                 {x.points.map((p) => (
                   <li key={p} className="flex gap-2 text-xs leading-relaxed text-mist">
@@ -148,13 +136,18 @@ export function ResumeSheet() {
           ))}
 
           <H>Projects</H>
-          {projects.map((p) => (
-            <div key={p.id} className="mb-3">
-              <div className="flex flex-wrap justify-between gap-x-3">
-                <p className="text-sm font-semibold text-bone">{p.title}</p>
-                <p className="text-xs text-smoke">{p.year}</p>
-              </div>
-              <p className="text-xs text-mist">{p.stack.join(', ')}</p>
+          {resume.projects.map((p) => (
+            <div key={p.title} className="mb-3">
+              <p className="text-sm font-semibold text-bone">{p.title}</p>
+              <p className="text-xs text-smoke">{p.stack}</p>
+              <ul className="mt-2 space-y-1.5">
+                {p.points.map((point) => (
+                  <li key={point} className="flex gap-2 text-xs leading-relaxed text-mist">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-crimson-2" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -162,32 +155,29 @@ export function ResumeSheet() {
         <div>
           <H>Skills</H>
           <div className="space-y-2">
-            {skillCategories.map((c) => (
-              <p key={c.id} className="text-xs leading-relaxed text-mist">
-                <span className="font-semibold text-bone">{c.title}: </span>
-                {c.skills.map((s) => s.name).join(', ')}
+            {resume.skills.map((skill) => (
+              <p key={skill.title} className="text-xs leading-relaxed text-mist">
+                <span className="font-semibold text-bone">{skill.title}: </span>
+                {skill.items}
               </p>
             ))}
           </div>
 
-          <H>Achievements</H>
-          <ul className="space-y-2">
-            {achievements.map((a) => (
-              <li key={a.id} className="text-xs leading-relaxed text-mist">
-                <span className="font-semibold text-bone">
-                  {a.title} — {a.org}.
-                </span>{' '}
-                {a.detail}
-              </li>
-            ))}
-          </ul>
+          <H>Education</H>
+          {resume.education.map((item) => (
+            <div key={item.school} className="mb-3">
+              <p className="text-sm font-semibold text-bone">{item.degree}</p>
+              <p className="text-xs leading-relaxed text-mist">{item.school}</p>
+              <p className="text-xs text-smoke">{item.period}</p>
+            </div>
+          ))}
 
           <H>Certifications</H>
-          <p className="text-xs leading-relaxed text-mist">
-            {Array.from(new Set(certifications.map((c) => c.issuer)))
-              .map((iss) => `${iss}: ${certifications.filter((c) => c.issuer === iss).map((c) => c.name).join(', ')}`)
-              .join(' · ')}
-          </p>
+          <ul className="space-y-2">
+            {resume.certifications.map((certification) => (
+              <li key={certification} className="text-xs leading-relaxed text-mist">{certification}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </article>
