@@ -7,7 +7,7 @@ import { mkdirSync } from 'node:fs';
 const OUT = 'public/assets';
 mkdirSync(OUT, { recursive: true });
 
-const hi = sharp('pic1.jpeg');
+const hi = sharp('pic1.png');
 const { width, height } = await hi.metadata();
 
 const alpha = await sharp('pic.png')
@@ -18,7 +18,7 @@ const alpha = await sharp('pic.png')
   .raw()
   .toBuffer();
 
-const rgb = await sharp('pic1.jpeg').removeAlpha().raw().toBuffer();
+const rgb = await sharp('pic1.png').removeAlpha().raw().toBuffer();
 const rgba = Buffer.alloc(width * height * 4);
 for (let i = 0; i < width * height; i++) {
   rgba[i * 4] = rgb[i * 3];
@@ -45,7 +45,7 @@ await sharp({ create: { width: 1200, height: 630, channels: 4, background: '#070
     { input: portrait, gravity: 'southeast' },
     {
       input: Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-        <text x="72" y="300" font-family="Impact, 'Arial Narrow', sans-serif" font-size="128" fill="#f4f1ec" letter-spacing="4">SUSHMITA</text>
+        <text x="72" y="300" font-family="Impact, 'Arial Narrow', sans-serif" font-size="128" fill="#f4f1ec" letter-spacing="4">Rayyan</text>
         <text x="78" y="352" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="26" fill="#ff3d5a" letter-spacing="16">THE SERIES</text>
         <text x="78" y="420" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="18" fill="#a7a6ad" letter-spacing="5">FULL-STACK DEVELOPER • AI / ML • JAVA</text>
       </svg>`),

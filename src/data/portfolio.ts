@@ -1,5 +1,5 @@
 /**
- * Central portfolio data — generated from Sushmita's resume (Sushmita_dasari.pdf).
+ * Central portfolio data — generated from Rayyan's resume (Rayyan_dasari.pdf).
  * Every fact on the site comes from this file. Update it here and the whole site follows.
  * Nothing here should be added unless it appears on the resume.
  */
@@ -7,9 +7,9 @@
 export type Palette = { from: string; via: string; to: string; accent: string };
 
 export const profile = {
-  fullName: 'Dasari Venkata Ratna Sri Sushmita',
-  displayName: 'Sushmita Dasari',
-  firstName: 'SUSHMITA',
+  fullName: 'Dasari Venkata Ratna Sri Rayyan',
+  displayName: 'Rayyan Ali
+  firstName: 'Rayyan',
   seriesTag: 'THE SERIES',
   /** Fictional studio card shown at the very start of the opening sequence. */
   originalLabel: 'A DASARI ORIGINAL',
@@ -18,16 +18,16 @@ export const profile = {
   intro:
     'A B.Tech Artificial Intelligence & Machine Learning student (CGPA 9.10) and full-stack developer building AI-powered platforms, payment systems and multi-tenant SaaS with Java, Python, React, Node.js and Docker.',
   location: 'Surampalem, Andhra Pradesh',
-  email: 'sushmitadasari17@gmail.com',
+  email: 'Rayyandasari17@gmail.com',
   links: {
-    linkedin: 'https://www.linkedin.com/in/sushmita-dasari-227a40284/',
-    github: 'https://github.com/Sushmitadasari',
+    linkedin: 'https://www.linkedin.com/in/Rayyan-dasari-227a40284/',
+    github: 'https://github.com/Rayyandasari',
   },
-  resumePdf: '/assets/Sushmita_Dasari_Resume.pdf',
+  resumePdf: '/assets/Rayyan_Dasari_Resume.pdf',
   portrait: {
     src: '/assets/portrait-720.webp',
     srcSet: '/assets/portrait-420.webp 420w, /assets/portrait-720.webp 720w, /assets/portrait-1100.webp 1100w',
-    alt: 'Portrait of Sushmita Dasari',
+    alt: 'Portrait of Rayyan Ali
   },
   interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
 };
@@ -107,8 +107,8 @@ export const projects: Project[] = [
       { value: '45%', label: 'faster decision turnaround' },
       { value: '8', label: 'policy categories' },
     ],
-    // The resume links to https://github.com/Sushmitadasari/PolicyGuard-AI, which is not public yet (404).
-    // Add `github: 'https://github.com/Sushmitadasari/PolicyGuard-AI',` back once the repo is public.
+    // The resume links to https://github.com/Rayyandasari/PolicyGuard-AI, which is not public yet (404).
+    // Add `github: 'https://github.com/Rayyandasari/PolicyGuard-AI',` back once the repo is public.
     palette: { from: '#2a0610', via: '#7a0f24', to: '#0b0710', accent: '#ff3d5a' },
     motif: 'shield',
   },
@@ -136,7 +136,7 @@ export const projects: Project[] = [
       { value: '40%', label: 'faster API response' },
       { value: '3×', label: 'throughput under load' },
     ],
-    github: 'https://github.com/Sushmitadasari/Payment-gateway-system-Project',
+    github: 'https://github.com/Rayyandasari/Payment-gateway-system-Project',
     palette: { from: '#1a0d02', via: '#8a4a07', to: '#0a0806', accent: '#ffb547' },
     motif: 'flow',
   },
@@ -163,7 +163,7 @@ export const projects: Project[] = [
       { value: '0', label: 'unauthorized-access incidents' },
       { value: '45m → <2m', label: 'environment setup time' },
     ],
-    github: 'https://github.com/Sushmitadasari/Multi-Tenant-SaaS-Platform',
+    github: 'https://github.com/Rayyandasari/Multi-Tenant-SaaS-Platform',
     palette: { from: '#04121f', via: '#0f4c6e', to: '#05080d', accent: '#4cc9ff' },
     motif: 'tenants',
   },
@@ -563,7 +563,7 @@ export const introSlides: IntroSlide[] = [
   },
 ];
 
-export type ProfileId = 'sushmita' | 'recruiter' | 'developer' | 'creative';
+export type ProfileId = 'Rayyan' | 'recruiter' | 'developer' | 'creative';
 export type SectionId = 'about' | 'journey' | 'originals' | 'picks' | 'skills' | 'moments' | 'story';
 
 export const viewerProfiles: {
@@ -574,8 +574,8 @@ export const viewerProfiles: {
   order: SectionId[];
 }[] = [
   {
-    id: 'sushmita',
-    name: 'Sushmita',
+    id: 'Rayyan',
+    name: 'Rayyan',
     blurb: 'The full series, in order',
     color: '#e5132b',
     order: ['about', 'journey', 'originals', 'picks', 'skills', 'moments', 'story'],
