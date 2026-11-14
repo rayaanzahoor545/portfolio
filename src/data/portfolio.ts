@@ -1,5 +1,5 @@
 /**
- * Central portfolio data — generated from Sushmita's resume (Sushmita_dasari.pdf).
+ * Central portfolio data — generated from Sushmita's resume (_dasari.pdf).
  * Every fact on the site comes from this file. Update it here and the whole site follows.
  * Nothing here should be added unless it appears on the resume.
  */
@@ -7,16 +7,16 @@
 export type Palette = { from: string; via: string; to: string; accent: string };
 
 export const profile = {
-  fullName: 'Dasari Venkata Ratna Sri Sushmita',
-  displayName: 'Sushmita Dasari',
-  firstName: 'SUSHMITA',
+  fullName: 'Rayaan Ali',
+  displayName: 'Rayaan Ali',
+  firstName: 'RAYAAN',
   seriesTag: 'THE SERIES',
   /** Fictional studio card shown at the very start of the opening sequence. */
-  originalLabel: 'A DASARI ORIGINAL',
-  role: 'Full-Stack Developer',
-  tagline: ['Full-Stack Developer', 'AI / ML', 'Java'],
+  originalLabel: 'A RAYAAN ORIGINAL',
+  role: 'Data Analyst & BI Specialist',
+  tagline: ['DATA ANALYST', 'BUSINESS INTELLIGENCE', 'PYTHON', 'SQL', 'POWER BI'],
   intro:
-    'A B.Tech Artificial Intelligence & Machine Learning student (CGPA 9.10) and full-stack developer building AI-powered platforms, payment systems and multi-tenant SaaS with Java, Python, React, Node.js and Docker.',
+    'A passionate Data Analyst and Business Intelligence specialist transforming complex data into actionable insights and high-impact visual dashboards with Python, SQL, and Power BI.',
   location: 'Surampalem, Andhra Pradesh',
   email: 'sushmitadasari17@gmail.com',
   links: {
@@ -26,10 +26,10 @@ export const profile = {
   resumePdf: '/assets/Sushmita_Dasari_Resume.pdf',
   portrait: {
     src: '/assets/pic.png',
-    srcSet: '/assets/pic.png, /assets/pic.png, /assets/pic.png',
+    srcSet: '/assets/pic.png',
     alt: 'Portrait of Rayaan Ali',
   },
-  interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
+  interests: ['Data Analytics', 'Business Intelligence', 'Machine Learning'],
 };
 // ew
 export const education = [
@@ -243,6 +243,18 @@ export type SkillCategory = { id: string; title: string; subtitle: string; skill
 
 export const skillCategories: SkillCategory[] = [
   {
+    id: 'analytics',
+    title: 'Data & Analytics',
+    subtitle: 'Business Intelligence & Insights',
+    skills: [
+      { name: 'Python', mono: 'Py', note: 'Primary' },
+      { name: 'SQL', mono: 'Sq', note: 'Core' },
+      { name: 'Power BI', mono: 'Bi', note: 'Dashboards' },
+      { name: 'Data Analytics', mono: 'Da' },
+      { name: 'Business Intelligence', mono: 'Bi' },
+    ],
+  },
+  {
     id: 'languages',
     title: 'Languages',
     subtitle: 'Java is the primary language',
@@ -328,6 +340,10 @@ export const skillCategories: SkillCategory[] = [
  * where the skill appears in the projects, certifications or achievements on the resume.
  */
 export const skillEvidence: Record<string, string[]> = {
+  'Power BI': ['Interactive Dashboards & Business Intelligence', 'Data Visualization & Reporting'],
+  SQL: ['Database Querying, Normalization & Analytics', 'HackerRank 5-star in SQL'],
+  'Data Analytics': ['Exploratory Data Analysis', 'KPI & Business Metrics Modeling'],
+  'Business Intelligence': ['Executive Dashboards', 'BI Reporting & Strategic Insights'],
   Java: ['Oracle Java Certified Foundations Associate', 'HackerRank 5-star'],
   Python: ['PolicyGuard AI', 'Cisco Python Essentials 1', 'HackerRank 5-star'],
   C: ['HackerRank 5-star'],
@@ -508,7 +524,7 @@ export const seasons: Season[] = [
 export type TopPick = { label: string; title: string; detail: string; palette: Palette };
 
 export const topPicks: TopPick[] = [
-  { label: 'Primary language', title: 'Java', detail: 'Listed as primary on the resume • Oracle certified', palette: amber },
+  { label: 'Primary focus', title: 'Data Analytics', detail: 'Python • SQL • Power BI', palette: amber },
   { label: 'The AI Original', title: 'PolicyGuard AI', detail: '500+ documents • 92% accuracy', palette: crimson },
   { label: 'Biggest stage', title: 'Flipkart GRiD 7.0', detail: 'Semi-Finalist', palette: ocean },
   { label: 'National selection', title: 'AlgoUniversity', detail: 'Tech Fellow', palette: violet },
@@ -532,9 +548,9 @@ export const introSlides: IntroSlide[] = [
   },
   {
     kicker: 'Skills',
-    title: 'Java first.',
-    lines: ['Python, C, C++ · React, Node.js, Express.js', 'PostgreSQL, MongoDB, MySQL · Docker, REST, JWT'],
-    chips: ['Java', 'Python', 'React', 'Node.js', 'Docker', 'PostgreSQL'],
+    title: 'Data & Analytics first.',
+    lines: ['Python, SQL, Power BI · Business Intelligence', 'Data Analytics, Visualization, Modeling & Dashboards'],
+    chips: ['Python', 'SQL', 'Power BI', 'Data Analyst', 'BI'],
   },
   {
     kicker: 'Training',
@@ -563,7 +579,7 @@ export const introSlides: IntroSlide[] = [
   },
 ];
 
-export type ProfileId = 'sushmita' | 'recruiter' | 'developer' | 'creative';
+export type ProfileId = 'rayaan' | 'recruiter' | 'developer' | 'creative';
 export type SectionId = 'about' | 'journey' | 'originals' | 'picks' | 'skills' | 'moments' | 'story';
 
 export const viewerProfiles: {
@@ -574,8 +590,8 @@ export const viewerProfiles: {
   order: SectionId[];
 }[] = [
   {
-    id: 'sushmita',
-    name: 'Sushmita',
+    id: 'rayaan',
+    name: 'Rayaan',
     blurb: 'The full series, in order',
     color: '#e5132b',
     order: ['about', 'journey', 'originals', 'picks', 'skills', 'moments', 'story'],

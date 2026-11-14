@@ -46,7 +46,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
   const floating = [
     { text: education[0].score, sub: 'B.Tech AI & ML', pos: 'left-[2%] top-[30%]', depth: 1 },
     { text: `${achievements[0].title}`, sub: achievements[0].org, pos: 'right-[0%] top-[18%]', depth: -1 },
-    { text: 'Java · React · Node.js', sub: 'Primary stack', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
+    { text: 'Python · SQL · Power BI', sub: 'Primary stack', pos: 'right-[4%] bottom-[24%]', depth: 0.6 },
   ];
 
   return (
@@ -88,11 +88,8 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
           <div aria-hidden className="absolute bottom-[8%] left-1/2 h-[78%] w-[78%] -translate-x-1/2 rounded-full border border-crimson-2/20 shadow-[0_0_120px_rgba(229,19,43,0.35),inset_0_0_80px_rgba(229,19,43,0.18)]" />
           <img
             src={profile.portrait.src}
-            srcSet={profile.portrait.srcSet}
-            sizes="(max-width: 1024px) 100vw, 54vw"
             alt={profile.portrait.alt}
-
-            className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_97%)]"
+            className="absolute bottom-0 left-1/2 h-[88%] max-h-[660px] w-auto max-w-[92vw] -translate-x-1/2 object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] [mask-image:linear-gradient(to_bottom,black_82%,transparent_99%)]"
           />
           {/* crimson rim light on the image edge */}
           <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_80%_30%,rgba(255,61,90,0.16),transparent_70%)] mix-blend-screen" />

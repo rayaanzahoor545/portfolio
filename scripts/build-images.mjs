@@ -54,3 +54,4 @@ await sharp({ create: { width: 1200, height: 630, channels: 4, background: '#070
   .jpeg({ quality: 85 })
   .toFile(`${OUT}/bg-image.jpg`);
 console.log('images built');
+// dw
