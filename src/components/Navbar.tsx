@@ -82,7 +82,7 @@ export default function Navbar({ order, profileId, onSwitch }: { order: SectionI
             onClick={() => go('contact')}
             className="hidden rounded-full border border-white/15 px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-bone transition hover:border-crimson-2 hover:text-crimson-2 sm:block"
           >
-            LET&apos;S BUILD
+            LET&apos;S CONNECT
           </button>
           <div className="relative" ref={menuRef}>
             <button
