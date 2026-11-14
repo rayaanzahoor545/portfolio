@@ -26,7 +26,7 @@ export const profile = {
   resumePdf: '/assets/Sushmita_Dasari_Resume.pdf',
   portrait: {
     src: '/assets/ pic.png',
-    srcSet: '/assets/ pic.png 420w, /assets/ pic.png 720w, /assets/ pic.png 1100w',
+    srcSet: '/assets/ pic.png, /assets/ pic.png, /assets/ pic.png',
     alt: 'Portrait of Sushmita Dasari',
   },
   interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
