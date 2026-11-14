@@ -27,7 +27,7 @@ export const profile = {
   portrait: {
     src: '/assets/ pic.png',
     srcSet: '/assets/pic.png, /assets/pic.png, /assets/pic.png',
-    alt: 'Portrait of Sushmita Dasari',
+    alt: 'Portrait of Rayaan Ali',
   },
   interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
 };

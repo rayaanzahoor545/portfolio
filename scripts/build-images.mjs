@@ -1,5 +1,5 @@
 // Builds optimized portrait assets from the original photos in the project root.
-// pic1.jpeg = high-resolution source, pic.png = background-removed cutout (same framing).
+// pic1.png = high-resolution source, pic.png = background-removed cutout (same framing).
 // The cutout's alpha mask is upscaled and applied to the high-res photo so the face stays sharp.
 import sharp from 'sharp';
 import { mkdirSync } from 'node:fs';
@@ -7,7 +7,7 @@ import { mkdirSync } from 'node:fs';
 const OUT = 'public/assets';
 mkdirSync(OUT, { recursive: true });
 
-const hi = sharp('pic1.jpeg');
+const hi = sharp('pic1.png');
 const { width, height } = await hi.metadata();
 
 const alpha = await sharp('pic.png')
@@ -18,7 +18,7 @@ const alpha = await sharp('pic.png')
   .raw()
   .toBuffer();
 
-const rgb = await sharp('pic1.jpeg').removeAlpha().raw().toBuffer();
+const rgb = await sharp('pic1.png').removeAlpha().raw().toBuffer();
 const rgba = Buffer.alloc(width * height * 4);
 for (let i = 0; i < width * height; i++) {
   rgba[i * 4] = rgb[i * 3];
@@ -52,5 +52,5 @@ await sharp({ create: { width: 1200, height: 630, channels: 4, background: '#070
     },
   ])
   .jpeg({ quality: 85 })
-  .toFile(`${OUT}/og-image.jpg`);
+  .toFile(`${OUT}/og-image.png`);
 console.log('images built');
