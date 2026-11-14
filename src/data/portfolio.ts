@@ -25,7 +25,7 @@ export const profile = {
   },
   resumePdf: '/assets/Sushmita_Dasari_Resume.pdf',
   portrait: {
-    src: '/assets/ pic.png',
+    src: '/assets/pic.png',
     srcSet: '/assets/pic.png, /assets/pic.png, /assets/pic.png',
     alt: 'Portrait of Rayaan Ali',
   },
