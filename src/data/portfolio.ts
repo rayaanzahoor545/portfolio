@@ -26,12 +26,12 @@ export const profile = {
   resumePdf: '/assets/Sushmita_Dasari_Resume.pdf',
   portrait: {
     src: '/assets/ pic.png',
-    srcSet: '/assets/ pic.png, /assets/ pic.png, /assets/ pic.png',
+    srcSet: '/assets/pic.png, /assets/pic.png, /assets/pic.png',
     alt: 'Portrait of Sushmita Dasari',
   },
   interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
 };
-
+// ew
 export const education = [
   {
     school: 'Aditya Engineering College',
