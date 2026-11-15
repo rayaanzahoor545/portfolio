@@ -293,8 +293,18 @@ function VideoPresenter({
         <div className="flex items-center gap-1.5">
           <button
             type="button"
+            onClick={onTogglePause}
+            title={paused ? 'Resume Reel & Video' : 'Pause Reel & Video'}
+            aria-label={paused ? 'Resume' : 'Pause'}
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
+          >
+            {paused ? '▶' : '❚❚'}
+          </button>
+          <button
+            type="button"
             onClick={() => setMuted((m) => !m)}
             title={muted ? 'Unmute' : 'Mute'}
+            aria-label={muted ? 'Unmute' : 'Mute'}
             className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
           >
             {muted ? '🔇' : '🔊'}
@@ -303,6 +313,7 @@ function VideoPresenter({
             type="button"
             onClick={() => setSpotlight((s) => !s)}
             title={spotlight ? 'Picture-in-Picture' : 'Spotlight View'}
+            aria-label={spotlight ? 'Picture-in-Picture' : 'Spotlight View'}
             className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
           >
             {spotlight ? '🗗' : '⛶'}
@@ -311,6 +322,7 @@ function VideoPresenter({
             type="button"
             onClick={() => setMinimized(true)}
             title="Minimize"
+            aria-label="Minimize"
             className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
           >
             —
