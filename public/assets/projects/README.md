@@ -5,7 +5,7 @@ Aap apne 4 projects ki screenshots ya pictures yahan save kar sakte hain:
 1. `supply-chain.png` -> Global Supply Chain Analytics & Risk Intelligence
 2. `ecommerce-analytics.png` -> E-Commerce Business Intelligence & Performance Analytics
 3. `healthcare-analytics.png` -> Healthcare Operations & Patient Flow Analytics
-4. `cloud-etl.png` -> Cloud Data Warehouse & Automated ETL Pipeline
+4. `hr-analytics.png` -> IBM HR Analytics: Employee Attrition & Workforce Trends
 
 ### How to enable images in code:
 `src/data/portfolio.ts` mein har project ke andar `image` field available hai:

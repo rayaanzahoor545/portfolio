@@ -21,7 +21,7 @@ export const profile = {
   email: 'r.rayyanzahoor@gmail.com',
   links: {
     linkedin: 'https://www.linkedin.com/in/rayyanzahoor',
-    github: 'https://github.com/rayyanzahoor',
+    github: 'https://github.com/rayaanzahoor545',
   },
   resumePdf: '/assets/Rayyan_Ali_Data-Analyst_Resume.pdf',
   portrait: {
@@ -84,7 +84,8 @@ export const projects: Project[] = [
     genre: 'Supply Chain • Risk Intelligence • BI',
     logline: 'Analyzed supplier performance, inventory levels, and stock-outs across 1,000+ SKUs with SQL analysis and a 5-page interactive Power BI dashboard.',
     stack: ['Power BI', 'SQL', 'Python', 'Excel', 'DAX'],
-    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
+    github: 'https://github.com/rayaanzahoor545/End-to-End-Supply-Chain-Analytics-Risk-Intelligeance-Project-Python-SQL-Power-BI-',
+    image: '', // Place screenshot in public/assets/projects/supply-chain.png and set to '/assets/projects/supply-chain.png'
     build: [
       'Analyzed supplier performance, inventory levels, and recurring stock-outs across 1,000+ SKUs to identify critical inventory risks and potential replenishment bottlenecks.',
       'Applied SQL-based SKU & supplier analysis to identify the 15–20% of products associated with the majority of recorded stock-out incidents (Pareto distribution).',
@@ -113,7 +114,8 @@ export const projects: Project[] = [
     genre: 'E-Commerce • Python EDA • Star Schema',
     logline: 'Analyzed 99,441 orders and 112,650 order-item records from Olist E-Commerce dataset using Python (Pandas), SQL, and Power BI.',
     stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'DAX', 'Advanced Excel'],
-    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
+    github: 'https://github.com/rayaanzahoor545/E-Commerce-Business-Intelligence-Performance-Analytics',
+    image: '', // Place screenshot in public/assets/projects/ecommerce.png and set to '/assets/projects/ecommerce.png'
     build: [
       'Analyzed 99,441 orders and 112,650 order-item records from the Brazilian Olist E-Commerce dataset to examine sales trends, customer behavior, product categories, seller performance, payments, delivery operations, and reviews.',
       'Used Python (Pandas) and SQL for data inspection, cleaning, exploratory data analysis (EDA), and metric validation; developed robust Power BI data models with DAX measures and interactive reporting views.',
@@ -139,12 +141,13 @@ export const projects: Project[] = [
     id: 'healthcare-bi-dashboard',
     title: 'Healthcare Operations & Patient Flow Analytics Dashboard',
     year: '2024',
-    genre: 'Healthcare BI • Clinical KPIs • Tableau & Power BI',
-    logline: 'Designed interactive Power BI and Tableau dashboards tracking patient throughput, bed occupancy, clinical wait times, and facility resource utilization.',
-    stack: ['Power BI', 'Tableau', 'SQL', 'DAX', 'Advanced Excel'],
-    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
+    genre: 'Healthcare BI • Clinical KPIs • Power BI',
+    logline: 'End-to-end healthcare data analytics examining patient throughput, admission & discharge patterns, and clinical wait times with SQL and Power BI.',
+    stack: ['Excel', 'SQL', 'Python', 'Power BI', 'DAX'],
+    github: 'https://github.com/rayaanzahoor545/Healthcare-Analytics-Project',
+    image: '', // Place screenshot in public/assets/projects/healthcare.png and set to '/assets/projects/healthcare.png'
     build: [
-      'Designed, enhanced, and maintained interactive Power BI and Tableau dashboards across healthcare operational domains, transforming static spreadsheets into centralized clinical KPI scorecards.',
+      'Designed, enhanced, and maintained interactive Power BI dashboards across healthcare operational domains, transforming static spreadsheets into centralized clinical KPI scorecards.',
       'Applied SQL CTEs and window functions on healthcare records to calculate average patient wait times, triage throughput, and facility bed-occupancy velocity.',
       'Configured role-based security and HIPAA-compliant data views, enabling department heads and administrators to monitor service bottlenecks in real time.',
     ],
@@ -152,8 +155,8 @@ export const projects: Project[] = [
       'Clinical patient admission & discharge velocity tracking',
       'Departmental bed occupancy & resource heatmaps',
       'Wait-time bottleneck diagnostics across triage stages',
-      'Tableau & Power BI multi-domain reporting suite',
-      'Automated daily refresh from hospital operational data',
+      'Interactive Power BI multi-domain reporting suite',
+      'Automated refresh workflows from operational healthcare records',
     ],
     metrics: [
       { value: '15+', label: 'clinical KPIs tracked' },
@@ -165,32 +168,33 @@ export const projects: Project[] = [
     motif: 'shield',
   },
   {
-    id: 'cloud-etl-platform',
-    title: 'Cloud Data Warehouse & Automated ETL Pipeline',
+    id: 'ibm-hr-analytics',
+    title: 'IBM HR Analytics: Employee Attrition & Workforce Trends',
     year: '2024',
-    genre: 'Cloud ETL • Azure & AWS • Data Warehousing',
-    logline: 'Engineered cloud ETL pipelines integrating 50K+ records across Azure Data Factory, Synapse, AWS Glue, and Athena, cutting reporting discrepancies by 15–20%.',
-    stack: ['Azure Data Factory', 'Azure Synapse', 'AWS Glue', 'AWS Athena', 'SQL', 'Python'],
-    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
+    genre: 'HR Analytics • Tableau & MySQL • Workforce Trends',
+    logline: 'End-to-end HR analytics project diagnosing employee turnover drivers, salary benchmarks, and retention risks across departments using Python, MySQL, and Tableau.',
+    stack: ['Excel', 'Python', 'MySQL', 'Tableau', 'EDA'],
+    github: 'https://github.com/rayaanzahoor545/IBM-HR-Analytics-Employee-Attrition-Analysis',
+    image: '', // Place screenshot in public/assets/projects/hr-analytics.png and set to '/assets/projects/hr-analytics.png'
     build: [
-      'Architected cloud-based ETL workflows and data platforms using Azure Data Factory, Azure Synapse Analytics, AWS Glue, and AWS Athena to support downstream analytical reporting.',
-      'Delivered end-to-end data pipelines analyzing 50K+ records with SQL and Python, reducing stakeholder-reported data quality issues by 15–20% through systematic validation.',
-      'Automated data ingestion and transformation from operational databases into clean Star and Snowflake dimensional schemas, saving 5–6 hours of manual spreadsheet work weekly.',
+      'Analyzed 1,470 employee records across 35 variables using Python and MySQL to evaluate employee attrition, satisfaction scores, and workforce distribution.',
+      'Engineered SQL queries and CTEs to segment attrition by department, education field, overtime status, and salary hike percentages, revealing key turnover drivers.',
+      'Built an interactive Tableau dashboard visualizing attrition rate KPIs, salary disparities, and tenure correlations, providing actionable retention strategies.',
     ],
     features: [
-      'Cloud ETL automation via Azure Data Factory & AWS Glue',
-      'Serverless ad-hoc query execution via AWS Athena & Synapse',
-      '50K+ records validated with automated anomaly detection',
-      'Star and Snowflake schema data warehouse design',
-      'Direct semantic model connectivity for Power BI & Tableau',
+      '1,470 employee records analyzed across 35 workforce attributes',
+      'MySQL database queries & CTEs for attrition segmentation',
+      'Python exploratory data analysis (EDA) & correlation modeling',
+      'Interactive Tableau executive workforce & retention dashboard',
+      'Departmental salary parity & overtime impact analysis',
     ],
     metrics: [
-      { value: '50K+', label: 'records analyzed per project' },
-      { value: '5–6 hrs', label: 'saved weekly in reporting' },
-      { value: '15–20%', label: 'fewer data quality issues' },
-      { value: 'Azure+AWS', label: 'hybrid cloud pipeline' },
+      { value: '1,470', label: 'employee records analyzed' },
+      { value: '35+', label: 'workforce variables evaluated' },
+      { value: 'Tableau', label: 'interactive executive dashboard' },
+      { value: 'MySQL', label: 'structured queries & EDA' },
     ],
-    palette: { from: '#04121f', via: '#0f4c6e', to: '#05080d', accent: '#4cc9ff' },
+    palette: { from: '#1a0826', via: '#5a1380', to: '#0c0412', accent: '#d264ff' },
     motif: 'tenants',
   },
 ];
@@ -482,9 +486,9 @@ export const seasons: Season[] = [
       },
       {
         code: 'S04 E04',
-        title: 'Cloud Data Warehouse & Automated ETL',
-        description: 'Multi-source pipeline automation with Azure Data Factory, Synapse, AWS Glue, and Athena.',
-        tags: ['Azure', 'AWS', 'Data Lakehouse', 'ETL'],
+        title: 'IBM HR Attrition Analytics',
+        description: 'Workforce analytics across 1,470 employees diagnosing turnover drivers, overtime impact, and salary benchmarks.',
+        tags: ['Tableau', 'MySQL', 'HR Analytics', 'Workforce'],
         runtime: '2024',
         palette: violet,
       },
@@ -516,7 +520,7 @@ export const topPicks: TopPick[] = [
   { label: 'Supply Chain Original', title: 'Supply Chain Risk', detail: '1,000+ SKUs • 2h → <15m reporting turnaround', palette: crimson },
   { label: 'E-Commerce Original', title: 'Olist Analytics', detail: '99,441 orders • 112,650 order-item records', palette: violet },
   { label: 'Healthcare Original', title: 'Clinical Operations', detail: 'Patient throughput & bed occupancy analytics', palette: jade },
-  { label: 'Cloud ETL Platform', title: 'Azure & AWS', detail: 'Data Factory • Synapse • AWS Glue • Athena', palette: ocean },
+  { label: 'Workforce Original', title: 'HR Analytics', detail: '1,470 records • Turnover drivers & Tableau dashboard', palette: violet },
   { label: 'Manual Time Saved', title: '5–6 Hours / Week', detail: 'Automated KPI reporting at Enterprosys', palette: amber },
   { label: 'Data Quality Impact', title: '15–20% Reduction', detail: 'Fewer reported data discrepancies via validation', palette: jade },
   { label: 'IBM Credential', title: 'IBM SkillsBuild', detail: 'Data Analytics Fluency Pathway (6 micro-credentials)', palette: violet },
@@ -550,7 +554,7 @@ export const introSlides: IntroSlide[] = [
       'Supply Chain Risk Intelligence — 1,000+ SKUs, 2h to <15m turnaround',
       'E-Commerce Analytics — 99,441 orders & 112,650 items analyzed',
       'Healthcare Operations — Patient throughput & bed occupancy tracking',
-      'Cloud ETL Warehouse — Multi-source pipeline automation with Azure & AWS',
+      'IBM HR Analytics — Workforce turnover drivers, overtime & salary benchmarks',
     ],
   },
   {
