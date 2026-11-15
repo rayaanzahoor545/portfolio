@@ -134,9 +134,14 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
           ))}
         </motion.div>
 
-        <motion.p variants={item} className="mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-bone/90 sm:text-xs sm:tracking-[0.34em]">
-          {profile.tagline.join(' • ')}
-        </motion.p>
+        <motion.div variants={item} className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-bone/90 sm:text-xs sm:tracking-[0.22em]">
+          {profile.tagline.map((t, idx) => (
+            <span key={t} className="flex items-center gap-2.5">
+              {idx > 0 && <span className="font-bold text-crimson-2 select-none">•</span>}
+              <span>{t}</span>
+            </span>
+          ))}
+        </motion.div>
 
         <motion.p variants={item} className="mt-4 max-w-xl text-[15px] leading-relaxed text-bone/80 sm:text-base">
           {profile.intro}

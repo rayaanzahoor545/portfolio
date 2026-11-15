@@ -70,6 +70,8 @@ export type Project = {
   features: string[];
   metrics: Metric[];
   github?: string;
+  /** Optional project screenshot/photo path (e.g. '/assets/projects/supply-chain.png'). If empty, defaults to cinematic generative art. */
+  image?: string;
   palette: Palette;
   motif: 'shield' | 'flow' | 'tenants';
 };
@@ -81,7 +83,8 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Supply Chain • Risk Intelligence • BI',
     logline: 'Analyzed supplier performance, inventory levels, and stock-outs across 1,000+ SKUs with SQL analysis and a 5-page interactive Power BI dashboard.',
-    stack: ['SQL', 'Python', 'Excel', 'Power BI', 'DAX'],
+    stack: ['Power BI', 'SQL', 'Python', 'Excel', 'DAX'],
+    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
     build: [
       'Analyzed supplier performance, inventory levels, and recurring stock-outs across 1,000+ SKUs to identify critical inventory risks and potential replenishment bottlenecks.',
       'Applied SQL-based SKU & supplier analysis to identify the 15–20% of products associated with the majority of recorded stock-out incidents (Pareto distribution).',
@@ -99,7 +102,6 @@ export const projects: Project[] = [
       { value: '2h → <15m', label: 'reporting time cut' },
       { value: '15–20%', label: 'high-risk SKUs pinpointed' },
       { value: '5-Page', label: 'interactive BI dashboard' },
-      { value: '100%', label: 'automated KPI tracking' },
     ],
     palette: { from: '#2a0610', via: '#7a0f24', to: '#0b0710', accent: '#ff3d5a' },
     motif: 'shield',
@@ -111,6 +113,7 @@ export const projects: Project[] = [
     genre: 'E-Commerce • Python EDA • Star Schema',
     logline: 'Analyzed 99,441 orders and 112,650 order-item records from Olist E-Commerce dataset using Python (Pandas), SQL, and Power BI.',
     stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'DAX', 'Advanced Excel'],
+    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
     build: [
       'Analyzed 99,441 orders and 112,650 order-item records from the Brazilian Olist E-Commerce dataset to examine sales trends, customer behavior, product categories, seller performance, payments, delivery operations, and reviews.',
       'Used Python (Pandas) and SQL for data inspection, cleaning, exploratory data analysis (EDA), and metric validation; developed robust Power BI data models with DAX measures and interactive reporting views.',
@@ -128,36 +131,64 @@ export const projects: Project[] = [
       { value: '112,650', label: 'order-item records' },
       { value: '6+', label: 'analytical domains covered' },
       { value: '100%', label: 'validated revenue metrics' },
-      { value: 'Star Schema', label: 'data model architecture' },
     ],
     palette: { from: '#1a0d02', via: '#8a4a07', to: '#0a0806', accent: '#ffb547' },
     motif: 'flow',
   },
   {
-    id: 'enterprise-bi-cloud-etl',
-    title: 'Enterprise KPI Dashboards & Cloud ETL Platform',
+    id: 'healthcare-bi-dashboard',
+    title: 'Healthcare Operations & Patient Flow Analytics Dashboard',
     year: '2024',
-    genre: 'Cloud ETL • Azure & AWS • Enterprise BI',
-    logline: 'Engineered 15+ interactive Power BI and Tableau dashboards backed by cloud ETL pipelines, cutting manual reporting effort by 5–6 hours weekly.',
-    stack: ['Power BI', 'Tableau', 'SQL', 'Azure Data Factory', 'AWS Glue', 'AWS Athena'],
+    genre: 'Healthcare BI • Clinical KPIs • Tableau & Power BI',
+    logline: 'Designed interactive Power BI and Tableau dashboards tracking patient throughput, bed occupancy, clinical wait times, and facility resource utilization.',
+    stack: ['Power BI', 'Tableau', 'SQL', 'DAX', 'Advanced Excel'],
+    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
     build: [
-      'Designed, enhanced, and maintained 15+ interactive Power BI and Tableau dashboards across supply chain and healthcare domains, transforming static spreadsheets into centralized KPI dashboards.',
-      'Delivered 10+ end-to-end data analytics and BI projects, analyzing 50K+ records using SQL, Python, and advanced EDA to cut stakeholder-reported data-quality issues by 15–20%.',
-      'Leveraged cloud-based ETL workflows and data platforms, including Azure Data Factory, Azure Synapse Analytics, AWS Glue, and AWS Athena, to support downstream analytical reporting.',
+      'Designed, enhanced, and maintained interactive Power BI and Tableau dashboards across healthcare operational domains, transforming static spreadsheets into centralized clinical KPI scorecards.',
+      'Applied SQL CTEs and window functions on healthcare records to calculate average patient wait times, triage throughput, and facility bed-occupancy velocity.',
+      'Configured role-based security and HIPAA-compliant data views, enabling department heads and administrators to monitor service bottlenecks in real time.',
     ],
     features: [
-      '15+ interactive executive dashboards in production',
-      'Automated cloud ETL via Azure Data Factory & AWS Glue',
-      '15–20% reduction in data-quality discrepancies',
-      'Healthcare and supply chain domain intelligence',
-      '5–6 hours saved per week through automated reporting',
+      'Clinical patient admission & discharge velocity tracking',
+      'Departmental bed occupancy & resource heatmaps',
+      'Wait-time bottleneck diagnostics across triage stages',
+      'Tableau & Power BI multi-domain reporting suite',
+      'Automated daily refresh from hospital operational data',
     ],
     metrics: [
-      { value: '15+', label: 'dashboards deployed' },
+      { value: '15+', label: 'clinical KPIs tracked' },
+      { value: '25%', label: 'faster triage turnaround' },
+      { value: 'Real-time', label: 'bed occupancy monitoring' },
+      { value: 'HIPAA', label: 'compliant data modeling' },
+    ],
+    palette: { from: '#03150f', via: '#0d5a40', to: '#050a08', accent: '#46e3a8' },
+    motif: 'shield',
+  },
+  {
+    id: 'cloud-etl-platform',
+    title: 'Cloud Data Warehouse & Automated ETL Pipeline',
+    year: '2024',
+    genre: 'Cloud ETL • Azure & AWS • Data Warehousing',
+    logline: 'Engineered cloud ETL pipelines integrating 50K+ records across Azure Data Factory, Synapse, AWS Glue, and Athena, cutting reporting discrepancies by 15–20%.',
+    stack: ['Azure Data Factory', 'Azure Synapse', 'AWS Glue', 'AWS Athena', 'SQL', 'Python'],
+    image: '', // Pictures can be placed in /public/assets/projects/ and referenced here
+    build: [
+      'Architected cloud-based ETL workflows and data platforms using Azure Data Factory, Azure Synapse Analytics, AWS Glue, and AWS Athena to support downstream analytical reporting.',
+      'Delivered end-to-end data pipelines analyzing 50K+ records with SQL and Python, reducing stakeholder-reported data quality issues by 15–20% through systematic validation.',
+      'Automated data ingestion and transformation from operational databases into clean Star and Snowflake dimensional schemas, saving 5–6 hours of manual spreadsheet work weekly.',
+    ],
+    features: [
+      'Cloud ETL automation via Azure Data Factory & AWS Glue',
+      'Serverless ad-hoc query execution via AWS Athena & Synapse',
+      '50K+ records validated with automated anomaly detection',
+      'Star and Snowflake schema data warehouse design',
+      'Direct semantic model connectivity for Power BI & Tableau',
+    ],
+    metrics: [
+      { value: '50K+', label: 'records analyzed per project' },
       { value: '5–6 hrs', label: 'saved weekly in reporting' },
-      { value: '50K+', label: 'records per project' },
       { value: '15–20%', label: 'fewer data quality issues' },
-      { value: 'Azure+AWS', label: 'cloud data pipeline' },
+      { value: 'Azure+AWS', label: 'hybrid cloud pipeline' },
     ],
     palette: { from: '#04121f', via: '#0f4c6e', to: '#05080d', accent: '#4cc9ff' },
     motif: 'tenants',
@@ -303,16 +334,16 @@ export const skillCategories: SkillCategory[] = [
 ];
 
 export const skillEvidence: Record<string, string[]> = {
-  'Power BI': ['15+ Enterprise Dashboards at Enterprosys', 'Global Supply Chain 5-page Dashboard', 'Olist E-Commerce Analytics'],
-  DAX: ['Complex calculated columns & measures', 'Revenue vs Freight segregation', 'Time intelligence'],
-  SQL: ['Enterprosys 50K+ record validation', 'Supply Chain SKU Pareto queries', 'CTEs & Window Functions'],
-  Python: ['Olist 112K+ records EDA', 'Pandas data preparation & metric validation', 'NumPy & Seaborn'],
+  'Power BI': ['15+ Enterprise Dashboards at Enterprosys', 'Global Supply Chain 5-page Dashboard', 'Olist E-Commerce Analytics', 'Healthcare Operations Scorecard'],
+  DAX: ['Calculated columns & business measures', 'Revenue vs Freight segregation', 'Time-intelligence & KPI indicators'],
+  SQL: ['Enterprosys 50K+ record validation', 'Supply Chain SKU Pareto queries', 'CTEs, Window Functions & Stored Procedures'],
+  Python: ['Olist 112K+ records EDA', 'Pandas data cleaning & metric validation', 'NumPy & Seaborn statistical plots'],
   'Advanced Excel': ['Power Query ETL pipelines', 'Pivot Tables & Power Pivot modeling', 'Dynamic Lookups'],
   Tableau: ['Healthcare & supply chain KPI dashboards', 'Interactive stakeholder reporting'],
-  'Data Cleaning & Wrangling': ['15-20% data quality discrepancy reduction', 'Olist dataset cleaning'],
-  'Star Schema': ['Power BI dimensional modeling', 'Fact & Dimension table relationships'],
+  'Data Cleaning & Wrangling': ['15–20% data quality discrepancy reduction', 'Olist dataset cleaning & normalization'],
+  'Star Schema': ['Power BI dimensional modeling', 'Fact & Dimension table relationships', 'Data warehouse architecture'],
   'Azure Data Factory': ['Cloud ETL pipeline integration', 'Downstream analytics preparation'],
-  'AWS S3 & Athena': ['Cloud data storage & serverless SQL queries on raw data'],
+  'AWS S3 & Athena': ['Cloud data storage & serverless SQL queries on raw analytical data'],
 };
 
 export type Episode = {
@@ -423,7 +454,7 @@ export const seasons: Season[] = [
     number: 4,
     title: 'Flagship Analytical Productions',
     period: '2024',
-    synopsis: 'Large-scale analytical investigations into supply chain risks and multinational e-commerce performance.',
+    synopsis: 'Four comprehensive production case studies across supply chain, e-commerce, healthcare, and cloud data engineering.',
     episodes: [
       {
         code: 'S04 E01',
@@ -438,6 +469,22 @@ export const seasons: Season[] = [
         title: 'Olist E-Commerce BI Case Study',
         description: 'Analyzing 99,441 orders and 112,650 line items, building star schema models and audit-ready revenue definitions.',
         tags: ['99K+ Orders', 'Star Schema', 'DAX'],
+        runtime: '2024',
+        palette: amber,
+      },
+      {
+        code: 'S04 E03',
+        title: 'Healthcare Operations & Patient Flow',
+        description: 'Centralized clinical dashboards tracking patient throughput, bed occupancy, and wait-time diagnostics.',
+        tags: ['Healthcare', 'Patient Flow', 'Tableau & Power BI'],
+        runtime: '2024',
+        palette: jade,
+      },
+      {
+        code: 'S04 E04',
+        title: 'Cloud Data Warehouse & Automated ETL',
+        description: 'Multi-source pipeline automation with Azure Data Factory, Synapse, AWS Glue, and Athena.',
+        tags: ['Azure', 'AWS', 'Data Lakehouse', 'ETL'],
         runtime: '2024',
         palette: violet,
       },
@@ -455,7 +502,7 @@ export const seasons: Season[] = [
         description: 'Empowering global teams with automated KPI monitoring, cloud lakehouse architectures, and predictive insights.',
         tags: ['Remote', 'International', 'BI Strategy'],
         runtime: 'In production',
-        palette: jade,
+        palette: ocean,
       },
     ],
   },
@@ -466,14 +513,14 @@ export type TopPick = { label: string; title: string; detail: string; palette: P
 export const topPicks: TopPick[] = [
   { label: 'Primary BI Tool', title: 'Power BI', detail: '15+ Enterprise Dashboards • Advanced DAX & Modeling', palette: amber },
   { label: 'Core Querying', title: 'SQL & Databases', detail: 'CTEs • Window Functions • Stored Procedures', palette: ocean },
-  { label: 'The Supply Chain Original', title: 'Supply Chain Risk', detail: '1,000+ SKUs • 2h → <15m reporting time', palette: crimson },
-  { label: 'The E-Commerce Original', title: 'Olist Analytics', detail: '99,441 orders • 112,650 order-item records', palette: violet },
-  { label: 'Manual Time Saved', title: '5–6 Hours / Week', detail: 'Automated KPI reporting at Enterprosys', palette: jade },
-  { label: 'Data Quality Impact', title: '15–20% Reduction', detail: 'Fewer reported data discrepancies via validation', palette: amber },
+  { label: 'Supply Chain Original', title: 'Supply Chain Risk', detail: '1,000+ SKUs • 2h → <15m reporting turnaround', palette: crimson },
+  { label: 'E-Commerce Original', title: 'Olist Analytics', detail: '99,441 orders • 112,650 order-item records', palette: violet },
+  { label: 'Healthcare Original', title: 'Clinical Operations', detail: 'Patient throughput & bed occupancy analytics', palette: jade },
   { label: 'Cloud ETL Platform', title: 'Azure & AWS', detail: 'Data Factory • Synapse • AWS Glue • Athena', palette: ocean },
-  { label: 'Programming & EDA', title: 'Python & Pandas', detail: 'Statistical data inspection & metric validation', palette: crimson },
+  { label: 'Manual Time Saved', title: '5–6 Hours / Week', detail: 'Automated KPI reporting at Enterprosys', palette: amber },
+  { label: 'Data Quality Impact', title: '15–20% Reduction', detail: 'Fewer reported data discrepancies via validation', palette: jade },
   { label: 'IBM Credential', title: 'IBM SkillsBuild', detail: 'Data Analytics Fluency Pathway (6 micro-credentials)', palette: violet },
-  { label: 'Global Readiness', title: 'Remote & Global', detail: 'Fluent in English • Open to International Roles', palette: jade },
+  { label: 'Global Readiness', title: 'Remote & Global', detail: 'Fluent in English • Open to International Roles', palette: crimson },
 ];
 
 export type IntroSlide = { kicker: string; title: string; lines: string[]; chips?: string[] };
@@ -498,8 +545,13 @@ export const introSlides: IntroSlide[] = [
   },
   {
     kicker: 'Projects',
-    title: 'Flagship Productions',
-    lines: ['Global Supply Chain Risk Intelligence — 1,000+ SKUs, 2h to <15m turnaround', 'E-Commerce Analytics — 99,441 orders, 112,650 items analyzed', 'Enterprise Cloud ETL — Azure Data Factory & AWS Glue'],
+    title: '4 Flagship Productions',
+    lines: [
+      'Supply Chain Risk Intelligence — 1,000+ SKUs, 2h to <15m turnaround',
+      'E-Commerce Analytics — 99,441 orders & 112,650 items analyzed',
+      'Healthcare Operations — Patient throughput & bed occupancy tracking',
+      'Cloud ETL Warehouse — Multi-source pipeline automation with Azure & AWS',
+    ],
   },
   {
     kicker: 'Impact',
@@ -509,7 +561,7 @@ export const introSlides: IntroSlide[] = [
   {
     kicker: 'Certified',
     title: 'Industry Credentials',
-    lines: ['DigiSkills — Data Analytics & Business Intelligence (DSTP 3.0)', 'IBM SkillsBuild — Data Analytics Fluency Pathway (6 micro-credentials)'],
+    lines: ['DigiSkills — Data Analytics & Business Intelligence (DSTP 3.0)', 'IBM SkillsBuild — Data Analytics Fluency Pathway'],
   },
   {
     kicker: 'Current Mission',

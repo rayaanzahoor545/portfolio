@@ -113,6 +113,58 @@ export function ResumeSheet() {
 
       <div className="grid gap-x-10 md:grid-cols-[1.4fr_1fr]">
         <div>
+          <H>Work Experience</H>
+          {experience.map((x) => (
+            <div key={x.company} className="mb-6">
+              <div className="flex flex-wrap justify-between gap-x-3">
+                <p className="text-sm font-semibold text-bone">
+                  {x.company} — <span className="font-medium text-crimson-2">{x.role}</span>
+                </p>
+                <p className="text-xs text-smoke">{x.period}</p>
+              </div>
+              <p className="text-xs text-mist">{x.place}</p>
+              <ul className="mt-2 space-y-1.5">
+                {x.points.map((p) => (
+                  <li key={p} className="flex gap-2 text-xs leading-relaxed text-mist">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-crimson-2" />
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <H>Featured Projects</H>
+          {projects.map((p) => (
+            <div key={p.id} className="mb-4">
+              <div className="flex flex-wrap justify-between gap-x-3">
+                <p className="text-sm font-semibold text-bone">{p.title}</p>
+                <p className="text-xs text-smoke">{p.year}</p>
+              </div>
+              <p className="text-xs font-medium text-crimson-2/90">{p.stack.join(' · ')}</p>
+              <ul className="mt-1.5 space-y-1">
+                {p.build.slice(0, 2).map((b) => (
+                  <li key={b} className="flex gap-2 text-xs leading-relaxed text-mist">
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-white/40" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <H>Skills & Tools</H>
+          <div className="space-y-2">
+            {skillCategories.map((c) => (
+              <p key={c.id} className="text-xs leading-relaxed text-mist">
+                <span className="font-semibold text-bone">{c.title}: </span>
+                {c.skills.map((s) => s.name).join(', ')}
+              </p>
+            ))}
+          </div>
+
           <H>Education</H>
           {education.map((e) => (
             <div key={e.school} className="mb-4">
@@ -123,72 +175,32 @@ export function ResumeSheet() {
                 <p className="text-xs text-smoke">{e.period}</p>
               </div>
               <p className="text-xs text-mist">
-                {e.degree} · <span className="text-bone/80">{e.score}</span>
+                {e.degree}
               </p>
             </div>
           ))}
 
-          <H>Work Experience</H>
-          {experience.map((x) => (
-            <div key={x.company}>
-              <div className="flex flex-wrap justify-between gap-x-3">
-                <p className="text-sm font-semibold text-bone">
-                  {x.company} — {x.role}
-                </p>
-                <p className="text-xs text-smoke">{x.period}</p>
-              </div>
-              <ul className="mt-2 space-y-1.5">
-                {x.points.map((p) => (
-                  <li key={p} className="flex gap-2 text-xs leading-relaxed text-mist">
-                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-crimson-2" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-
-          <H>Projects</H>
-          {projects.map((p) => (
-            <div key={p.id} className="mb-3">
-              <div className="flex flex-wrap justify-between gap-x-3">
-                <p className="text-sm font-semibold text-bone">{p.title}</p>
-                <p className="text-xs text-smoke">{p.year}</p>
-              </div>
-              <p className="text-xs text-mist">{p.stack.join(', ')}</p>
-            </div>
-          ))}
-        </div>
-
-        <div>
-          <H>Skills</H>
-          <div className="space-y-2">
-            {skillCategories.map((c) => (
-              <p key={c.id} className="text-xs leading-relaxed text-mist">
-                <span className="font-semibold text-bone">{c.title}: </span>
-                {c.skills.map((s) => s.name).join(', ')}
-              </p>
-            ))}
-          </div>
-
-          <H>Achievements</H>
-          <ul className="space-y-2">
-            {achievements.map((a) => (
-              <li key={a.id} className="text-xs leading-relaxed text-mist">
-                <span className="font-semibold text-bone">
-                  {a.title} — {a.org}.
-                </span>{' '}
-                {a.detail}
+          <H>Certifications</H>
+          <ul className="space-y-1.5">
+            {certifications.map((c) => (
+              <li key={c.name} className="text-xs leading-relaxed text-mist">
+                <span className="font-semibold text-bone">{c.issuer}: </span>
+                {c.name}
               </li>
             ))}
           </ul>
 
-          <H>Certifications</H>
-          <p className="text-xs leading-relaxed text-mist">
-            {Array.from(new Set(certifications.map((c) => c.issuer)))
-              .map((iss) => `${iss}: ${certifications.filter((c) => c.issuer === iss).map((c) => c.name).join(', ')}`)
-              .join(' · ')}
-          </p>
+          <H>Key Milestones</H>
+          <ul className="space-y-2">
+            {achievements.map((a) => (
+              <li key={a.id} className="text-xs leading-relaxed text-mist">
+                <span className="font-semibold text-bone">
+                  {a.title} ({a.org})
+                </span>{' '}
+                — {a.detail}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </article>

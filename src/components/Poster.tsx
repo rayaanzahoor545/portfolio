@@ -30,6 +30,18 @@ export function PosterBackdrop({ palette, children, className = '' }: { palette:
 /** Motif illustrations for each Original, built from the project's own architecture. */
 export function ProjectArt({ project, className = '' }: { project: Project; className?: string }) {
   const a = project.palette.accent;
+  if (project.image) {
+    return (
+      <div className={`relative h-full w-full overflow-hidden ${className}`}>
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-full w-full object-cover object-center"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
+      </div>
+    );
+  }
   return (
     <PosterBackdrop palette={project.palette} className={className}>
       <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full" aria-hidden>
@@ -98,7 +110,7 @@ export function SeriesMark({ className = '' }: { className?: string }) {
   return (
     <span className={`inline-flex items-center gap-1.5 ${className}`}>
       <svg viewBox="0 0 24 32" className="h-[1.1em] w-auto" aria-hidden>
-        <path d="M18 6c-1.8-1.8-4-2.6-6.5-2.6C7.6 3.4 5 5.6 5 9c0 7.6 14 4.6 14 11.6 0 3-2.8 5-6.4 5-3 0-5.4-1.2-7.2-3" fill="none" stroke="#e5132b" strokeWidth="4" strokeLinecap="round" />
+        <path d="M6 6 h8 c3.2 0 5 1.8 5 4.8 c0 3 -1.8 4.8 -5 4.8 H6 v10 M14 15.6 l6 10.4" fill="none" stroke="#e5132b" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span className="font-sans text-[0.62em] font-bold tracking-[0.36em] text-mist">SERIES</span>
     </span>
