@@ -28,13 +28,15 @@ export function PosterBackdrop({ palette, children, className = '' }: { palette:
 }
 
 /** Motif illustrations for each Original, built from the project's own architecture. */
-export function ProjectArt({ project, className = '' }: { project: Project; className?: string }) {
+export function ProjectArt({ project, className = '', activeImage }: { project: Project; className?: string; activeImage?: string }) {
   const a = project.palette.accent;
-  if (project.image) {
+  const cover = activeImage || project.image || (project.images && project.images.length > 0 ? project.images[0] : '');
+
+  if (cover) {
     return (
       <div className={`relative h-full w-full overflow-hidden ${className}`}>
         <img
-          src={project.image}
+          src={cover}
           alt={project.title}
           className="h-full w-full object-cover object-center"
         />

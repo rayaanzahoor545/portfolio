@@ -1,21 +1,52 @@
-# Project Images / Screenshots
+# Project Images & Personal Video Guide
 
-Aap apne 4 projects ki screenshots ya pictures yahan save kar sakte hain:
+## 1. Projects ki Multiple Images / Screenshots
 
-1. `supply-chain.png` -> Global Supply Chain Analytics & Risk Intelligence
-2. `ecommerce-analytics.png` -> E-Commerce Business Intelligence & Performance Analytics
-3. `healthcare-analytics.png` -> Healthcare Operations & Patient Flow Analytics
-4. `hr-analytics.png` -> IBM HR Analytics: Employee Attrition & Workforce Trends
+Aap har project ke liye multiple dashboard screenshots / sheets add kar sakte hain (e.g. Page 1: Overview, Page 2: Risk Matrix, Page 3: Drilldown, Page 4: SQL queries).
 
-### How to enable images in code:
-`src/data/portfolio.ts` mein har project ke andar `image` field available hai:
+Apni screenshots ko is folder mein copy karein:
+📂 `public/assets/projects/`
+
+### File Naming Convention:
+- **Project 1 (Supply Chain):**
+  - `supply-chain-1.png`
+  - `supply-chain-2.png`
+  - `supply-chain-3.png`
+  - `supply-chain-4.png`
+- **Project 2 (E-Commerce):**
+  - `ecommerce-1.png`
+  - `ecommerce-2.png`
+  - `ecommerce-3.png`
+- **Project 3 (Healthcare):**
+  - `healthcare-1.png`
+  - `healthcare-2.png`
+  - `healthcare-3.png`
+- **Project 4 (IBM HR Analytics):**
+  - `hr-analytics-1.png`
+  - `hr-analytics-2.png`
+  - `hr-analytics-3.png`
+
+### Activation in `src/data/portfolio.ts`:
+`portfolio.ts` mein har project ke andar `images` array already configure kar diya gaya hai:
 ```ts
-{
-  id: 'supply-chain-analytics',
-  title: 'Global Supply Chain Analytics & Risk Intelligence',
-  ...
-  image: '/assets/projects/supply-chain.png', // yahan image ka path daal dein
-  ...
-}
+images: [
+  '/assets/projects/supply-chain-1.png',
+  '/assets/projects/supply-chain-2.png',
+  '/assets/projects/supply-chain-3.png',
+],
 ```
-Jab tak aap image nahi daalte, tab tak system automatic cinematic generative artwork / visual motif show karega. Image ka path enter karte hi project card aur modal dono mein aapki screenshot / photo render ho jayegi!
+Website par project open karte hi interactive thumbnail carousel, full-resolution preview, aur fullscreen lightbox inspect mode enable ho jayega!
+
+---
+
+## 2. Personal Video Intro (Play Intro feature)
+
+Aapki talking video intro Play Intro sequence ke dauran live picture-in-picture presenter camera ke tor par chalegi:
+
+1. Apni video file ko is path par save karein:
+   📂 `public/assets/intro.mp4`
+2. Features enabled:
+   - **Picture-in-Picture Host Cam:** Screen ke bottom-right corner par aapki live video play hogi jab intro slides chal rahi hongi.
+   - **Tap to Unmute Voice:** Auto-play muted hota hai, button par tap karte hi sound on ho jayegi taake visitor aapko bolte sun sake.
+   - **Expand Theater Mode:** `⤢` button daba kar video ko full theater mode mein expand kiya ja sakta hai.
+   - **Synchronized Play/Pause:** Spacebar ya pause button dabane par video bhi rukegi aur resume hogi.

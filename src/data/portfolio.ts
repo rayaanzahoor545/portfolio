@@ -24,6 +24,8 @@ export const profile = {
     github: 'https://github.com/rayaanzahoor545',
   },
   resumePdf: '/assets/Rayyan_Ali_Data-Analyst_Resume.pdf',
+  /** Video intro file path. Place your personal video in public/assets/intro.mp4 */
+  introVideo: '/assets/intro.mp4',
   portrait: {
     src: '/assets/pic.png',
     srcSet: '/assets/pic.png',
@@ -70,8 +72,10 @@ export type Project = {
   features: string[];
   metrics: Metric[];
   github?: string;
-  /** Optional project screenshot/photo path (e.g. '/assets/projects/supply-chain.png'). If empty, defaults to cinematic generative art. */
+  /** Primary project screenshot/photo path (e.g. '/assets/projects/supply-chain-1.png'). If empty, defaults to cinematic generative art. */
   image?: string;
+  /** Multiple screenshots / dashboard sheets (e.g. ['/assets/projects/supply-chain-1.png', '/assets/projects/supply-chain-2.png']) */
+  images?: string[];
   palette: Palette;
   motif: 'shield' | 'flow' | 'tenants';
 };
@@ -85,7 +89,13 @@ export const projects: Project[] = [
     logline: 'Analyzed supplier performance, inventory levels, and stock-outs across 1,000+ SKUs with SQL analysis and a 5-page interactive Power BI dashboard.',
     stack: ['Power BI', 'SQL', 'Python', 'Excel', 'DAX'],
     github: 'https://github.com/rayaanzahoor545/End-to-End-Supply-Chain-Analytics-Risk-Intelligeance-Project-Python-SQL-Power-BI-',
-    image: '', // Place screenshot in public/assets/projects/supply-chain.png and set to '/assets/projects/supply-chain.png'
+    image: '', // Primary screenshot e.g. '/assets/projects/supply-chain-1.png'
+    images: [
+      '/assets/projects/supply-chain-1.png',
+      '/assets/projects/supply-chain-2.png',
+      '/assets/projects/supply-chain-3.png',
+      '/assets/projects/supply-chain-4.png',
+    ],
     build: [
       'Analyzed supplier performance, inventory levels, and recurring stock-outs across 1,000+ SKUs to identify critical inventory risks and potential replenishment bottlenecks.',
       'Applied SQL-based SKU & supplier analysis to identify the 15–20% of products associated with the majority of recorded stock-out incidents (Pareto distribution).',
@@ -115,7 +125,12 @@ export const projects: Project[] = [
     logline: 'Analyzed 99,441 orders and 112,650 order-item records from Olist E-Commerce dataset using Python (Pandas), SQL, and Power BI.',
     stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'DAX', 'Advanced Excel'],
     github: 'https://github.com/rayaanzahoor545/E-Commerce-Business-Intelligence-Performance-Analytics',
-    image: '', // Place screenshot in public/assets/projects/ecommerce.png and set to '/assets/projects/ecommerce.png'
+    image: '', // Primary screenshot e.g. '/assets/projects/ecommerce-1.png'
+    images: [
+      '/assets/projects/ecommerce-1.png',
+      '/assets/projects/ecommerce-2.png',
+      '/assets/projects/ecommerce-3.png',
+    ],
     build: [
       'Analyzed 99,441 orders and 112,650 order-item records from the Brazilian Olist E-Commerce dataset to examine sales trends, customer behavior, product categories, seller performance, payments, delivery operations, and reviews.',
       'Used Python (Pandas) and SQL for data inspection, cleaning, exploratory data analysis (EDA), and metric validation; developed robust Power BI data models with DAX measures and interactive reporting views.',
@@ -145,7 +160,12 @@ export const projects: Project[] = [
     logline: 'End-to-end healthcare data analytics examining patient throughput, admission & discharge patterns, and clinical wait times with SQL and Power BI.',
     stack: ['Excel', 'SQL', 'Python', 'Power BI', 'DAX'],
     github: 'https://github.com/rayaanzahoor545/Healthcare-Analytics-Project',
-    image: '', // Place screenshot in public/assets/projects/healthcare.png and set to '/assets/projects/healthcare.png'
+    image: '', // Primary screenshot e.g. '/assets/projects/healthcare-1.png'
+    images: [
+      '/assets/projects/healthcare-1.png',
+      '/assets/projects/healthcare-2.png',
+      '/assets/projects/healthcare-3.png',
+    ],
     build: [
       'Designed, enhanced, and maintained interactive Power BI dashboards across healthcare operational domains, transforming static spreadsheets into centralized clinical KPI scorecards.',
       'Applied SQL CTEs and window functions on healthcare records to calculate average patient wait times, triage throughput, and facility bed-occupancy velocity.',
@@ -175,7 +195,12 @@ export const projects: Project[] = [
     logline: 'End-to-end HR analytics project diagnosing employee turnover drivers, salary benchmarks, and retention risks across departments using Python, MySQL, and Tableau.',
     stack: ['Excel', 'Python', 'MySQL', 'Tableau', 'EDA'],
     github: 'https://github.com/rayaanzahoor545/IBM-HR-Analytics-Employee-Attrition-Analysis',
-    image: '', // Place screenshot in public/assets/projects/hr-analytics.png and set to '/assets/projects/hr-analytics.png'
+    image: '', // Primary screenshot e.g. '/assets/projects/hr-analytics-1.png'
+    images: [
+      '/assets/projects/hr-analytics-1.png',
+      '/assets/projects/hr-analytics-2.png',
+      '/assets/projects/hr-analytics-3.png',
+    ],
     build: [
       'Analyzed 1,470 employee records across 35 variables using Python and MySQL to evaluate employee attrition, satisfaction scores, and workforce distribution.',
       'Engineered SQL queries and CTEs to segment attrition by department, education field, overtime status, and salary hike percentages, revealing key turnover drivers.',
