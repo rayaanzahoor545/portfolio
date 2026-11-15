@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { Palette, Project } from '../data/portfolio';
 
 /**
@@ -28,16 +28,16 @@ export function PosterBackdrop({ palette, children, className = '' }: { palette:
 }
 
 /** Motif illustrations for each Original, built from the project's own architecture. */
-export function ProjectArt({ project, className = '', activeImage }: { project: Project; className?: string; activeImage?: string }) {
+export function ProjectArt({ project, className = '' }: { project: Project; className?: string }) {
+  const [imgFailed, setImgFailed] = useState(false);
   const a = project.palette.accent;
-  const cover = activeImage || project.image || (project.images && project.images.length > 0 ? project.images[0] : '');
-
-  if (cover) {
+  if (project.image && !imgFailed) {
     return (
       <div className={`relative h-full w-full overflow-hidden ${className}`}>
         <img
-          src={cover}
+          src={project.image}
           alt={project.title}
+          onError={() => setImgFailed(true)}
           className="h-full w-full object-cover object-center"
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />

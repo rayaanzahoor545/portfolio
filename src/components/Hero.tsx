@@ -53,7 +53,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
     <section
       id="top"
       ref={ref}
-      className="relative min-h-[100svh] overflow-hidden"
+      className="relative min-h-[100svh] overflow-hidden pb-12 lg:pb-16"
       onPointerMove={(e) => {
         if (!fine) return;
         mx.set((e.clientX / window.innerWidth) * 2 - 1);
@@ -108,7 +108,7 @@ export default function Hero({ onPlay, onResume, profileId }: { onPlay: () => vo
 
       {/* copy */}
       <motion.div
-        className="gutter relative z-[4] flex min-h-[100svh] flex-col justify-end pb-20 pt-[54svh] sm:pb-24 lg:max-w-[54vw] lg:justify-center lg:pb-20 lg:pt-28"
+        className="gutter relative z-[4] flex min-h-[100svh] flex-col justify-end pb-24 pt-[50svh] sm:pb-32 lg:max-w-[52vw] lg:justify-center lg:pb-20 lg:pt-28"
         style={{ y: textY, opacity: fade }}
         variants={container}
         initial="hidden"

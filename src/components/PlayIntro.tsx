@@ -8,8 +8,8 @@ import { EASE } from './fx';
 const SLIDE_MS = 3600;
 
 /**
- * "▶ Play Intro": darken → zoom into the portrait → full-screen highlight reel
- * with synchronized Video Intro Presenter Box (Picture-in-Picture) → fade back to the portfolio.
+ * "▶ Play Intro": darken → zoom into the portrait → a full-screen highlight reel
+ * built only from resume facts + synced Video Presenter of Rayaan speaking.
  */
 export default function PlayIntro({ onClose }: { onClose: () => void }) {
   useScrollLock(true);
@@ -17,12 +17,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
   const [phase, setPhase] = useState<'zoom' | 'reel' | 'end'>(reduced ? 'reel' : 'zoom');
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [videoMuted, setVideoMuted] = useState(true);
-  const [videoExpanded, setVideoExpanded] = useState(false);
-  const [videoAvailable, setVideoAvailable] = useState(false);
-  const [showVideoBox, setShowVideoBox] = useState(true);
   const progress = useMotionValue(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (phase !== 'zoom') return;
@@ -40,7 +35,6 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
     });
     progress.set(0);
   }, [progress]);
-
   const prev = useCallback(() => {
     setIndex((i) => Math.max(0, i - 1));
     progress.set(0);
@@ -48,7 +42,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
 
   // one clock drives both the active progress bar and auto-advance, so pause is exact
   useEffect(() => {
-    if (phase !== 'reel' || paused || videoExpanded) return;
+    if (phase !== 'reel' || paused) return;
     let raf = 0;
     let last = performance.now();
     const tick = (now: number) => {
@@ -63,19 +57,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [phase, paused, videoExpanded, index, next, progress]);
-
-  // Sync video play/pause with intro state
-  useEffect(() => {
-    if (!videoRef.current) return;
-    if (paused) {
-      videoRef.current.pause();
-    } else if (phase === 'reel') {
-      videoRef.current.play().catch(() => {
-        /* autoplay policy handles gracefully */
-      });
-    }
-  }, [paused, phase]);
+  }, [phase, paused, index, next, progress]);
 
   useEffect(() => {
     if (phase !== 'end') return;
@@ -85,23 +67,17 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (videoExpanded) setVideoExpanded(false);
-        else onClose();
-      }
+      if (e.key === 'Escape') onClose();
       if (e.key === 'ArrowRight') next();
       if (e.key === 'ArrowLeft') prev();
       if (e.key === ' ') {
         e.preventDefault();
         setPaused((p) => !p);
       }
-      if (e.key.toLowerCase() === 'm') {
-        setVideoMuted((m) => !m);
-      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onClose, next, prev, videoExpanded]);
+  }, [onClose, next, prev]);
 
   const slide = introSlides[index];
 
@@ -114,7 +90,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
       transition={{ duration: 0.6 }}
       role="dialog"
       aria-modal="true"
-      aria-label="Intro highlight reel with personal video"
+      aria-label="Intro highlight reel"
     >
       {/* Zoom into the portrait */}
       <motion.div
@@ -132,7 +108,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
       </motion.div>
       <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_45%,rgba(120,10,25,0.35),transparent_70%)]" />
 
-      {/* Progress bars */}
+      {/* progress bars */}
       {phase !== 'zoom' && (
         <div className="absolute inset-x-0 top-0 z-20 flex gap-1.5 px-4 pt-4 sm:px-10 sm:pt-6">
           {introSlides.map((s, i) => (
@@ -146,10 +122,10 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
         </div>
       )}
 
-      {/* Reel slides */}
-      <div className={`relative z-10 flex h-full items-center justify-center px-6 text-center transition-all duration-500 ${showVideoBox && !videoExpanded ? 'lg:pr-[360px]' : ''}`}>
+      {/* reel text content */}
+      <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
         <AnimatePresence mode="wait">
-          {phase === 'reel' && !videoExpanded && (
+          {phase === 'reel' && (
             <motion.div
               key={index}
               className="max-w-4xl"
@@ -161,7 +137,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
               <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.5em] text-crimson-2 sm:text-xs">
                 Episode {String(index + 1).padStart(2, '0')} · {slide.kicker}
               </p>
-              <h2 className="font-display leading-[0.88] text-bone" style={{ fontSize: 'clamp(2.5rem, 8vw, 7.5rem)' }}>
+              <h2 className="font-display leading-[0.88] text-bone" style={{ fontSize: 'clamp(2.6rem, 9vw, 8rem)' }}>
                 {slide.title}
               </h2>
               <div className="mt-6 space-y-2">
@@ -194,7 +170,6 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
               )}
             </motion.div>
           )}
-
           {phase === 'end' && (
             <motion.div key="end" initial={{ opacity: 0, letterSpacing: '0.6em' }} animate={{ opacity: 1, letterSpacing: '0.2em' }} transition={{ duration: 1.2, ease: EASE }}>
               <p className="font-display text-5xl text-bone sm:text-7xl">NOW STREAMING</p>
@@ -204,137 +179,24 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
         </AnimatePresence>
       </div>
 
-      {/* PRESENTER VIDEO INTRO BOX (Picture-in-Picture corner or expanded theater) */}
-      {phase === 'reel' && showVideoBox && (
-        <motion.div
-          layout
-          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.5, ease: EASE }}
-          className={`z-30 overflow-hidden rounded-2xl border border-white/20 bg-ink-2/95 shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_40px_rgba(229,19,43,0.25)] backdrop-blur-2xl transition-all ${
-            videoExpanded
-              ? 'fixed inset-4 sm:inset-12 md:inset-20 z-50 flex flex-col'
-              : 'fixed bottom-24 right-4 sm:right-8 w-[270px] sm:w-[320px] md:w-[350px]'
-          }`}
-        >
-          {/* Header Bar */}
-          <div className="flex h-10 items-center justify-between border-b border-white/10 bg-black/60 px-3.5 backdrop-blur">
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-crimson opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-crimson" />
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-bone">
-                Rayaan · Intro Video
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => setVideoExpanded((e) => !e)}
-                title={videoExpanded ? 'Minimize video' : 'Expand theater mode'}
-                className="flex h-6 w-6 items-center justify-center rounded text-xs text-mist hover:bg-white/10 hover:text-bone"
-              >
-                {videoExpanded ? '⤡' : '⤢'}
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowVideoBox(false)}
-                title="Hide video box"
-                className="flex h-6 w-6 items-center justify-center rounded text-xs text-mist hover:bg-white/10 hover:text-bone"
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-
-          {/* Video Player Canvas */}
-          <div className={`relative ${videoExpanded ? 'flex-1 bg-black' : 'aspect-video w-full bg-black'}`}>
-            <video
-              ref={videoRef}
-              src={profile.introVideo}
-              autoPlay
-              playsInline
-              loop
-              muted={videoMuted}
-              onLoadedData={() => setVideoAvailable(true)}
-              onError={() => setVideoAvailable(false)}
-              className="h-full w-full object-cover"
-            />
-
-            {/* Fallback view when user has not yet dropped intro.mp4 in public/assets/ */}
-            {!videoAvailable && (
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[radial-gradient(circle_at_50%_40%,#3d0712,#09090e)] p-4 text-center">
-                <div className="relative mb-2 h-14 w-14 overflow-hidden rounded-full border border-crimson-2/50 shadow-[0_0_20px_rgba(229,19,43,0.4)]">
-                  <img src={profile.portrait.src} alt="Rayaan Ali" className="h-full w-full object-cover object-top" />
-                </div>
-                <p className="font-display text-base tracking-wide text-bone">Personal Video Box</p>
-                <p className="mt-1 text-[11px] leading-tight text-mist">
-                  Drop <code className="rounded bg-white/15 px-1 py-0.5 text-bone">intro.mp4</code> in <code className="rounded bg-white/15 px-1 py-0.5 text-bone">/public/assets/</code>
-                </p>
-                <div className="mt-2.5 flex items-center gap-1">
-                  {[40, 75, 100, 60, 90, 45, 80, 55].map((h, i) => (
-                    <span
-                      key={i}
-                      className="inline-block w-1 rounded-full bg-crimson-2"
-                      style={{
-                        height: `${h * 0.16}px`,
-                        animation: `pulse 1.2s infinite ease-in-out ${i * 0.12}s`,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Audio Toggle Overlay */}
-            <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={() => setVideoMuted((m) => !m)}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold backdrop-blur transition ${
-                  videoMuted
-                    ? 'border border-crimson-2/80 bg-crimson/90 text-white shadow-[0_0_20px_rgba(229,19,43,0.6)] animate-pulse'
-                    : 'border border-white/20 bg-black/70 text-bone hover:bg-black/90'
-                }`}
-              >
-                <span>{videoMuted ? '🔇' : '🔊'}</span>
-                <span>{videoMuted ? 'Tap to Unmute Voice' : 'Sound On'}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Subtitle / Topic Caption below video in expanded mode */}
-          {videoExpanded && (
-            <div className="border-t border-white/10 bg-ink-2 p-4 text-center">
-              <p className="text-xs uppercase tracking-[0.3em] text-crimson-2">Now Explaining: {slide.kicker}</p>
-              <p className="font-display text-2xl text-bone">{slide.title}</p>
-            </div>
-          )}
-        </motion.div>
+      {/* Floating Video Presenter (Speaking Video Section) */}
+      {phase === 'reel' && (
+        <VideoPresenter
+          videoSrc={profile.introVideo}
+          paused={paused}
+          onTogglePause={() => setPaused((p) => !p)}
+        />
       )}
 
-      {/* Button to restore video box if user dismissed it */}
-      {phase === 'reel' && !showVideoBox && (
-        <button
-          type="button"
-          onClick={() => setShowVideoBox(true)}
-          className="fixed bottom-24 right-4 sm:right-8 z-30 flex items-center gap-2 rounded-full border border-white/20 bg-ink-2/90 px-4 py-2 text-xs font-bold text-bone backdrop-blur shadow-xl hover:border-crimson-2"
-        >
-          <span>🔴</span> Show Video Intro
-        </button>
-      )}
-
-      {/* Tap zones for slide navigation */}
-      {phase === 'reel' && !videoExpanded && (
+      {/* tap zones (mobile-friendly) */}
+      {phase === 'reel' && (
         <>
           <button type="button" aria-label="Previous highlight" className="absolute inset-y-0 left-0 z-[5] w-1/4" onClick={prev} />
           <button type="button" aria-label="Next highlight" data-cursor="play" className="absolute inset-y-0 right-0 z-[5] w-1/4" onClick={next} />
         </>
       )}
 
-      {/* Bottom controls */}
+      {/* controls */}
       <div className="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:px-10 sm:pb-8">
         <div className="flex items-center gap-2">
           {phase === 'reel' && (
@@ -347,7 +209,7 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
               {paused ? '▶' : '❚❚'}
             </button>
           )}
-          <span className="hidden text-[11px] tracking-[0.2em] text-smoke sm:block">SPACE · ← → · M (MUTE) · ESC</span>
+          <span className="hidden text-[11px] tracking-[0.2em] text-smoke sm:block">SPACE · ← → · ESC</span>
         </div>
         <button
           type="button"
@@ -357,6 +219,158 @@ export default function PlayIntro({ onClose }: { onClose: () => void }) {
         >
           BACK TO BROWSE
         </button>
+      </div>
+    </motion.div>
+  );
+}
+
+function VideoPresenter({
+  videoSrc,
+  paused,
+  onTogglePause,
+}: {
+  videoSrc?: string;
+  paused: boolean;
+  onTogglePause: () => void;
+}) {
+  const [muted, setMuted] = useState(true);
+  const [spotlight, setSpotlight] = useState(false);
+  const [minimized, setMinimized] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (paused) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play().catch(() => {
+        /* browser autoplay policy fallback */
+      });
+    }
+  }, [paused]);
+
+  if (!videoSrc) return null;
+
+  if (minimized) {
+    return (
+      <motion.button
+        type="button"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        onClick={() => setMinimized(false)}
+        className="fixed bottom-24 right-4 sm:right-8 z-30 flex items-center gap-2.5 rounded-full bg-black/80 px-4 py-2 ring-1 ring-white/25 backdrop-blur-md shadow-xl hover:ring-crimson-2 transition text-xs text-bone"
+      >
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-crimson-2 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-crimson-2"></span>
+        </span>
+        <span className="font-semibold">Show Video Intro</span>
+      </motion.button>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className={`fixed z-30 transition-all duration-500 ${
+        spotlight
+          ? 'inset-x-4 top-16 bottom-28 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:w-[680px] sm:h-[480px] rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.9)]'
+          : 'bottom-24 right-4 sm:right-8 w-60 sm:w-80 md:w-88 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.85)]'
+      } overflow-hidden bg-ink-2 ring-1 ring-white/20 backdrop-blur-xl flex flex-col`}
+    >
+      {/* Header bar */}
+      <div className="flex items-center justify-between px-3.5 py-2.5 bg-black/60 border-b border-white/10 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-crimson-2 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-crimson-2"></span>
+          </span>
+          <span className="font-bold tracking-wider text-[11px] text-bone">RAYAAN ALI • INTRO</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={() => setMuted((m) => !m)}
+            title={muted ? 'Unmute' : 'Mute'}
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
+          >
+            {muted ? '🔇' : '🔊'}
+          </button>
+          <button
+            type="button"
+            onClick={() => setSpotlight((s) => !s)}
+            title={spotlight ? 'Picture-in-Picture' : 'Spotlight View'}
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
+          >
+            {spotlight ? '🗗' : '⛶'}
+          </button>
+          <button
+            type="button"
+            onClick={() => setMinimized(true)}
+            title="Minimize"
+            className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-bone text-xs transition"
+          >
+            —
+          </button>
+        </div>
+      </div>
+
+      {/* Video / Placeholder Body */}
+      <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden min-h-[160px] sm:min-h-[200px]">
+        {!hasError ? (
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            autoPlay
+            loop
+            muted={muted}
+            playsInline
+            onError={() => setHasError(true)}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          /* High-Tech Video Slot Placeholder */
+          <div className="relative flex h-full w-full flex-col items-center justify-center p-4 text-center">
+            <div className="relative mb-2">
+              <img
+                src={profile.portrait.src}
+                alt={profile.fullName}
+                className="h-16 w-16 sm:h-20 sm:w-20 rounded-full object-cover object-top ring-2 ring-crimson-2/60 shadow-lg"
+              />
+              <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-crimson-2 text-[10px] text-white font-bold">
+                ▶
+              </span>
+            </div>
+            <p className="text-xs font-semibold text-bone">Video Intro Slot Ready</p>
+            <p className="mt-1 text-[11px] text-mist leading-snug max-w-xs">
+              Save your speaking video to <code className="text-bone font-mono">public/assets/intro-video.mp4</code>
+            </p>
+            <div className="mt-2.5 flex items-center gap-1">
+              {[0.4, 0.9, 0.6, 1, 0.5, 0.8, 0.3].map((h, i) => (
+                <motion.span
+                  key={i}
+                  animate={{ scaleY: [h, 1.2, h] }}
+                  transition={{ duration: 0.8 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
+                  className="h-3 w-0.5 rounded-full bg-crimson-2"
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Unmute quick prompt overlay */}
+        {!hasError && muted && (
+          <button
+            type="button"
+            onClick={() => setMuted(false)}
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-black/80 px-3.5 py-1 text-[11px] font-bold text-bone ring-1 ring-white/30 backdrop-blur hover:bg-black transition"
+          >
+            <span>🔊</span> Tap to Unmute
+          </button>
+        )}
       </div>
     </motion.div>
   );

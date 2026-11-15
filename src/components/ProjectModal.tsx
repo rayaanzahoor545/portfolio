@@ -14,33 +14,23 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
   useScrollLock(true);
   const scroller = useRef<HTMLDivElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
-  const [activeImgIndex, setActiveImgIndex] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const prevFocus = document.activeElement as HTMLElement | null;
     closeBtn.current?.focus({ preventScroll: true });
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (lightboxOpen) setLightboxOpen(false);
-        else onClose();
-      }
-    };
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
     return () => {
       window.removeEventListener('keydown', onKey);
       prevFocus?.focus?.({ preventScroll: true });
     };
-  }, [onClose, lightboxOpen]);
+  }, [onClose]);
 
   useEffect(() => {
     scroller.current?.scrollTo({ top: 0 });
-    setActiveImgIndex(0);
   }, [project.id]);
 
   const more = projects.filter((p) => p.id !== project.id);
-  const gallery = project.images && project.images.length > 0 ? project.images : project.image ? [project.image] : [];
-  const currentImg = gallery[activeImgIndex] || project.image || '';
 
   return (
     <motion.div className="fixed inset-0 z-[140]" role="dialog" aria-modal="true" aria-labelledby={`title-${project.id}-modal`}>
@@ -60,11 +50,11 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
           exit={{ opacity: 0, y: 30, transition: { duration: 0.3 } }}
         >
           {/* billboard */}
-          <div className="relative h-[50vh] min-h-[340px] overflow-hidden sm:rounded-t-2xl">
+          <div className="relative h-[50vh] min-h-[320px] overflow-hidden sm:rounded-t-2xl">
             <motion.div layoutId={`art-${project.id}`} className="absolute inset-0" transition={{ duration: 0.7, ease: EASE }}>
-              <ProjectArt project={project} activeImage={currentImg} />
+              <ProjectArt project={project} />
             </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-ink-2/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-ink-2/30 to-transparent" />
             <button
               ref={closeBtn}
               type="button"
@@ -82,7 +72,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               <motion.h2
                 id={`title-${project.id}-modal`}
                 layoutId={`title-${project.id}`}
-                className="font-display text-[clamp(1.75rem,4.5vw,3.25rem)] leading-[0.92] tracking-wide text-bone"
+                className="font-display text-[clamp(2.2rem,5vw,4.4rem)] leading-[0.92] tracking-wide text-bone line-clamp-2"
                 transition={{ duration: 0.7, ease: EASE }}
               >
                 {project.title}
@@ -117,139 +107,39 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               </motion.div>
             )}
 
-            {/* RESULT / IMPACT - perfectly aligned 4 columns, no empty 5th slot */}
+            {/* impact */}
             <motion.section variants={block} className="mt-12">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">Result / Impact</h3>
-                <span className="text-xs text-smoke">Validated Project Metrics</span>
-              </div>
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <h3 className="mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">Result / Impact</h3>
+              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-white/10 sm:grid-cols-3 lg:grid-cols-4">
                 {project.metrics.map((m, i) => (
                   <motion.div
                     key={m.label}
-                    className="relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-4.5 sm:p-5 backdrop-blur-sm transition duration-300 hover:border-white/25 hover:bg-white/[0.06]"
-                    initial={{ opacity: 0, scale: 0.95 }}
+                    className="bg-ink p-4 sm:p-5"
+                    initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.35 + i * 0.06, duration: 0.5, ease: EASE }}
+                    transition={{ delay: 0.5 + i * 0.07, duration: 0.5, ease: EASE }}
                   >
-                    <div
-                      className="absolute inset-x-0 top-0 h-[2px]"
-                      style={{ background: i === 0 ? project.palette.accent : 'rgba(255,255,255,0.15)' }}
-                    />
-                    <p
-                      className="font-display text-3xl leading-none tracking-wide text-bone sm:text-4xl"
-                      style={{ color: i === 0 ? project.palette.accent : undefined }}
-                    >
+                    <p className="font-display text-4xl leading-none text-bone sm:text-5xl" style={{ color: i === 0 ? project.palette.accent : undefined }}>
                       {m.value}
                     </p>
-                    <p className="mt-2 text-xs font-medium uppercase tracking-wider text-mist">
-                      {m.label}
-                    </p>
+                    <p className="mt-2 text-xs leading-snug text-mist">{m.label}</p>
                   </motion.div>
                 ))}
               </div>
             </motion.section>
 
-            {/* MULTI-IMAGE DASHBOARD GALLERY */}
-            <motion.section variants={block} className="mt-12 border-t border-white/10 pt-10">
-              <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
+            {/* screenshots & dashboard gallery */}
+            <motion.section variants={block} className="mt-12">
+              <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
                 <div>
                   <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">Dashboard Previews & Visuals</h3>
-                  <p className="mt-1 text-sm text-mist">Interactive multi-page views of the analytical dashboards & data models</p>
+                  <p className="mt-1 text-xs text-mist">High-resolution interactive dashboards, workflows, and analytical outputs.</p>
                 </div>
-                {gallery.length > 0 && (
-                  <span className="text-xs font-medium text-bone/70">
-                    View {activeImgIndex + 1} of {gallery.length}
-                  </span>
-                )}
               </div>
-
-              {gallery.length > 0 ? (
-                <div className="space-y-4">
-                  {/* Main Active Image Viewport */}
-                  <div className="group relative aspect-video w-full overflow-hidden rounded-xl border border-white/15 bg-black/60 shadow-2xl">
-                    <img
-                      key={currentImg}
-                      src={currentImg}
-                      alt={`${project.title} - View ${activeImgIndex + 1}`}
-                      className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-                    <button
-                      type="button"
-                      onClick={() => setLightboxOpen(true)}
-                      className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-black/75 px-4 py-2 text-xs font-semibold text-bone backdrop-blur border border-white/20 transition hover:bg-white hover:text-ink"
-                    >
-                      <span>⛶</span> Fullscreen View
-                    </button>
-                    {gallery.length > 1 && (
-                      <>
-                        <button
-                          type="button"
-                          aria-label="Previous image"
-                          onClick={() => setActiveImgIndex((prev) => (prev > 0 ? prev - 1 : gallery.length - 1))}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-bone backdrop-blur border border-white/20 transition hover:bg-bone hover:text-ink"
-                        >
-                          ‹
-                        </button>
-                        <button
-                          type="button"
-                          aria-label="Next image"
-                          onClick={() => setActiveImgIndex((prev) => (prev < gallery.length - 1 ? prev + 1 : 0))}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-bone backdrop-blur border border-white/20 transition hover:bg-bone hover:text-ink"
-                        >
-                          ›
-                        </button>
-                      </>
-                    )}
-                  </div>
-
-                  {/* Thumbnails Strip */}
-                  {gallery.length > 1 && (
-                    <div className="flex gap-3 overflow-x-auto pb-2">
-                      {gallery.map((img, idx) => (
-                        <button
-                          key={img}
-                          type="button"
-                          onClick={() => setActiveImgIndex(idx)}
-                          className={`group relative aspect-video w-28 shrink-0 overflow-hidden rounded-lg border transition sm:w-36 ${
-                            idx === activeImgIndex
-                              ? 'border-crimson-2 ring-2 ring-crimson-2/50 scale-[1.03]'
-                              : 'border-white/15 opacity-60 hover:opacity-100'
-                          }`}
-                        >
-                          <img src={img} alt={`Thumbnail ${idx + 1}`} className="h-full w-full object-cover" />
-                          <span className="absolute bottom-1 right-1 rounded bg-black/70 px-1.5 py-0.5 text-[9px] font-bold text-bone">
-                            0{idx + 1}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                /* Fallback when images have not yet been copied to folder */
-                <div className="relative overflow-hidden rounded-xl border border-dashed border-white/20 bg-white/[0.02] p-8 text-center sm:p-12">
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl text-crimson-2">
-                    🖼
-                  </div>
-                  <h4 className="mt-4 font-display text-2xl tracking-wide text-bone">Multi-Image Gallery Ready</h4>
-                  <p className="mx-auto mt-2 max-w-lg text-sm leading-relaxed text-mist">
-                    Aap is project ke liye multiple dashboard screenshots add kar sakte hain. Screenshots ko{' '}
-                    <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-bone">public/assets/projects/</code> folder mein save karein aur unke paths{' '}
-                    <code className="rounded bg-white/10 px-1.5 py-0.5 text-xs text-bone">portfolio.ts</code> mein list karein.
-                  </p>
-                  <div className="mt-5 flex flex-wrap justify-center gap-2 text-xs font-semibold text-smoke">
-                    <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">Page 1: Overview</span>
-                    <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">Page 2: Risk Metrics</span>
-                    <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">Page 3: Drilldown & Analysis</span>
-                  </div>
-                </div>
-              )}
+              <ProjectGallery project={project} />
             </motion.section>
 
-            {/* MY CONTRIBUTION, TECH STACK & KEY FEATURES */}
-            <div className="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
+            <div className="mt-12 grid gap-10 lg:grid-cols-[3fr_2fr]">
               <motion.section variants={block}>
                 <h3 className="mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">My Contribution</h3>
                 <ul className="space-y-4">
@@ -286,7 +176,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               </div>
             </div>
 
-            {/* MORE ORIGINALS */}
+            {/* more like this */}
             <motion.section variants={block} className="mt-14 border-t border-white/10 pt-8">
               <h3 className="mb-4 font-sans text-lg font-semibold text-bone">More Originals</h3>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -303,7 +193,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                     </div>
                     <div className="absolute inset-x-0 bottom-0 p-4">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-mist">{p.genre}</p>
-                      <p className="font-display text-3xl leading-none tracking-wide text-bone">{p.title}</p>
+                      <p className="font-display text-3xl leading-none tracking-wide text-bone line-clamp-1">{p.title}</p>
                     </div>
                   </button>
                 ))}
@@ -312,33 +202,182 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
           </motion.div>
         </motion.div>
       </div>
+    </motion.div>
+  );
+}
 
-      {/* FULLSCREEN LIGHTBOX MODAL */}
+function ProjectGallery({ project }: { project: Project }) {
+  const images = project.images && project.images.length > 0
+    ? project.images
+    : project.image
+      ? [project.image]
+      : [];
+
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [failedImages, setFailedImages] = useState<Record<number, boolean>>({});
+  const [fullscreen, setFullscreen] = useState(false);
+
+  const prev = () => setActiveIdx((i) => (i === 0 ? images.length - 1 : i - 1));
+  const next = () => setActiveIdx((i) => (i === images.length - 1 ? 0 : i + 1));
+
+  const currentPath = images[activeIdx];
+  const isFailed = failedImages[activeIdx];
+
+  const viewTitles = [
+    'Executive Overview & Main KPI Dashboard',
+    'Deep-Dive Performance & Analytical Breakdown',
+    'Operational Flow & Matrix Heatmap View',
+    'Statistical Distribution & Trends View',
+  ];
+
+  return (
+    <div className="mt-2">
+      {/* Main Image Showcase */}
+      <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden rounded-2xl bg-ink ring-1 ring-white/10 shadow-2xl">
+        {!isFailed && currentPath ? (
+          <img
+            src={currentPath}
+            alt={`${project.title} view ${activeIdx + 1}`}
+            onError={() => setFailedImages((prev) => ({ ...prev, [activeIdx]: true }))}
+            className="h-full w-full object-cover object-top cursor-zoom-in transition-transform duration-500 hover:scale-[1.02]"
+            onClick={() => setFullscreen(true)}
+          />
+        ) : (
+          /* High-Tech Blueprint Placeholder */
+          <div className="relative flex h-full w-full flex-col items-center justify-center p-6 text-center overflow-hidden">
+            <div
+              className="absolute inset-0 opacity-25"
+              style={{
+                background: `radial-gradient(circle at 50% 40%, ${project.palette.accent}33, transparent 70%), linear-gradient(135deg, ${project.palette.from}, ${project.palette.to})`,
+              }}
+            />
+            {/* SVG Dashboard Mockup Wireframe */}
+            <svg viewBox="0 0 400 220" className="h-32 sm:h-40 w-auto text-white/20 mb-3" fill="none" stroke="currentColor">
+              <rect x="20" y="20" width="360" height="180" rx="8" strokeWidth="1.5" strokeDasharray="4 4" />
+              <rect x="36" y="36" width="96" height="40" rx="4" fill="currentColor" fillOpacity="0.1" />
+              <rect x="152" y="36" width="96" height="40" rx="4" fill="currentColor" fillOpacity="0.1" />
+              <rect x="268" y="36" width="96" height="40" rx="4" fill="currentColor" fillOpacity="0.1" />
+              <rect x="36" y="90" width="212" height="94" rx="4" fill="currentColor" fillOpacity="0.05" />
+              <line x1="50" y1="160" x2="80" y2="120" stroke={project.palette.accent} strokeWidth="2" strokeOpacity="0.7" />
+              <line x1="80" y1="120" x2="120" y2="140" stroke={project.palette.accent} strokeWidth="2" strokeOpacity="0.7" />
+              <line x1="120" y1="140" x2="160" y2="105" stroke={project.palette.accent} strokeWidth="2" strokeOpacity="0.7" />
+              <line x1="160" y1="105" x2="200" y2="130" stroke={project.palette.accent} strokeWidth="2" strokeOpacity="0.7" />
+              <line x1="200" y1="130" x2="230" y2="110" stroke={project.palette.accent} strokeWidth="2" strokeOpacity="0.7" />
+              <circle cx="200" cy="130" r="4" fill={project.palette.accent} />
+              <rect x="268" y="90" width="96" height="94" rx="4" fill="currentColor" fillOpacity="0.05" />
+              <circle cx="316" cy="137" r="28" stroke={project.palette.accent} strokeWidth="3" strokeOpacity="0.6" strokeDasharray="80 20" />
+            </svg>
+            <div className="relative z-10 max-w-md px-4">
+              <span className="inline-block rounded-full bg-crimson-2/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-crimson-2 ring-1 ring-crimson-2/40">
+                Dashboard Screenshot {activeIdx + 1} Slot Ready
+              </span>
+              <p className="mt-2 text-sm font-semibold text-bone">
+                {viewTitles[activeIdx % viewTitles.length]}
+              </p>
+              <p className="mt-1 text-xs text-mist leading-relaxed">
+                Add your screenshot to <code className="rounded bg-black/60 px-1.5 py-0.5 text-bone font-mono">{currentPath || `/assets/projects/${project.id}-${activeIdx + 1}.png`}</code> to showcase here.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* View title caption & zoom prompt */}
+        <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 text-xs text-bone backdrop-blur-[2px]">
+          <span className="font-medium tracking-wide">
+            {viewTitles[activeIdx % viewTitles.length]}
+          </span>
+          {!isFailed && currentPath && (
+            <button
+              type="button"
+              onClick={() => setFullscreen(true)}
+              className="flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 font-semibold text-bone transition hover:bg-white/25"
+            >
+              ⛶ Zoom Fullscreen
+            </button>
+          )}
+        </div>
+
+        {/* Prev / Next Arrows */}
+        {images.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={prev}
+              aria-label="Previous image"
+              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-lg text-bone backdrop-blur-md transition hover:bg-black/90 hover:scale-110"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next image"
+              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-lg text-bone backdrop-blur-md transition hover:bg-black/90 hover:scale-110"
+            >
+              ›
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Thumbnails Row */}
+      {images.length > 1 && (
+        <div className="mt-3.5 flex gap-3 overflow-x-auto pb-1">
+          {images.map((img, i) => {
+            const active = i === activeIdx;
+            return (
+              <button
+                key={img + i}
+                type="button"
+                onClick={() => setActiveIdx(i)}
+                className={`group relative aspect-video w-24 sm:w-28 shrink-0 overflow-hidden rounded-lg ring-1 transition ${
+                  active
+                    ? 'ring-2 ring-crimson-2 shadow-[0_0_15px_rgba(229,19,43,0.5)]'
+                    : 'ring-white/15 opacity-60 hover:opacity-100 hover:ring-white/40'
+                }`}
+              >
+                {!failedImages[i] ? (
+                  <img src={img} alt="" className="h-full w-full object-cover" onError={() => setFailedImages((prev) => ({ ...prev, [i]: true }))} />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-ink-2 text-[10px] font-bold text-mist">
+                    View {i + 1}
+                  </div>
+                )}
+                <span className="absolute bottom-1 right-1 rounded bg-black/70 px-1 text-[9px] font-bold text-bone">
+                  {i + 1}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Fullscreen Lightbox */}
       <AnimatePresence>
-        {lightboxOpen && currentImg && (
+        {fullscreen && !isFailed && currentPath && (
           <motion.div
-            className="fixed inset-0 z-[160] flex items-center justify-center bg-black/95 p-4 sm:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setLightboxOpen(false)}
+            className="fixed inset-0 z-[160] flex items-center justify-center bg-black/95 p-4 sm:p-10"
+            onClick={() => setFullscreen(false)}
           >
             <button
               type="button"
-              onClick={() => setLightboxOpen(false)}
+              onClick={() => setFullscreen(false)}
               className="absolute right-6 top-6 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-xl text-bone backdrop-blur hover:bg-white/20"
             >
               ✕
             </button>
             <img
-              src={currentImg}
-              alt={project.title}
-              className="max-h-[90vh] max-w-[92vw] rounded-lg object-contain shadow-2xl"
+              src={currentPath}
+              alt=""
+              className="max-h-[90vh] max-w-[95vw] rounded-xl object-contain shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             />
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }

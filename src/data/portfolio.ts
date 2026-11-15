@@ -24,8 +24,8 @@ export const profile = {
     github: 'https://github.com/rayaanzahoor545',
   },
   resumePdf: '/assets/Rayyan_Ali_Data-Analyst_Resume.pdf',
-  /** Video intro file path. Place your personal video in public/assets/intro.mp4 */
-  introVideo: '/assets/intro.mp4',
+  /** Video intro file of Rayaan speaking (placed in /public/assets/intro-video.mp4). */
+  introVideo: '/assets/intro-video.mp4',
   portrait: {
     src: '/assets/pic.png',
     srcSet: '/assets/pic.png',
@@ -72,9 +72,9 @@ export type Project = {
   features: string[];
   metrics: Metric[];
   github?: string;
-  /** Primary project screenshot/photo path (e.g. '/assets/projects/supply-chain-1.png'). If empty, defaults to cinematic generative art. */
+  /** Primary project screenshot/cover path (e.g. '/assets/projects/supply-chain-1.png'). Defaults to generative art if file is not found. */
   image?: string;
-  /** Multiple screenshots / dashboard sheets (e.g. ['/assets/projects/supply-chain-1.png', '/assets/projects/supply-chain-2.png']) */
+  /** Multiple screenshots/views for the project gallery shown in the project modal. */
   images?: string[];
   palette: Palette;
   motif: 'shield' | 'flow' | 'tenants';
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     logline: 'Analyzed supplier performance, inventory levels, and stock-outs across 1,000+ SKUs with SQL analysis and a 5-page interactive Power BI dashboard.',
     stack: ['Power BI', 'SQL', 'Python', 'Excel', 'DAX'],
     github: 'https://github.com/rayaanzahoor545/End-to-End-Supply-Chain-Analytics-Risk-Intelligeance-Project-Python-SQL-Power-BI-',
-    image: '', // Primary screenshot e.g. '/assets/projects/supply-chain-1.png'
+    image: '/assets/projects/supply-chain-1.png',
     images: [
       '/assets/projects/supply-chain-1.png',
       '/assets/projects/supply-chain-2.png',
@@ -125,11 +125,12 @@ export const projects: Project[] = [
     logline: 'Analyzed 99,441 orders and 112,650 order-item records from Olist E-Commerce dataset using Python (Pandas), SQL, and Power BI.',
     stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'DAX', 'Advanced Excel'],
     github: 'https://github.com/rayaanzahoor545/E-Commerce-Business-Intelligence-Performance-Analytics',
-    image: '', // Primary screenshot e.g. '/assets/projects/ecommerce-1.png'
+    image: '/assets/projects/ecommerce-1.png',
     images: [
       '/assets/projects/ecommerce-1.png',
       '/assets/projects/ecommerce-2.png',
       '/assets/projects/ecommerce-3.png',
+      '/assets/projects/ecommerce-4.png',
     ],
     build: [
       'Analyzed 99,441 orders and 112,650 order-item records from the Brazilian Olist E-Commerce dataset to examine sales trends, customer behavior, product categories, seller performance, payments, delivery operations, and reviews.',
@@ -153,21 +154,22 @@ export const projects: Project[] = [
     motif: 'flow',
   },
   {
-    id: 'healthcare-bi-dashboard',
-    title: 'Healthcare Operations & Patient Flow Analytics Dashboard',
+    id: 'healthcare-analytics',
+    title: 'Healthcare Operations & Patient Flow Analytics',
     year: '2024',
-    genre: 'Healthcare BI • Clinical KPIs • Power BI',
-    logline: 'End-to-end healthcare data analytics examining patient throughput, admission & discharge patterns, and clinical wait times with SQL and Power BI.',
-    stack: ['Excel', 'SQL', 'Python', 'Power BI', 'DAX'],
+    genre: 'Healthcare BI • Clinical KPIs • Tableau & Power BI',
+    logline: 'Designed interactive Power BI and Tableau dashboards tracking patient throughput, bed occupancy, clinical wait times, and facility resource utilization.',
+    stack: ['Power BI', 'Tableau', 'SQL', 'Python', 'DAX', 'Advanced Excel'],
     github: 'https://github.com/rayaanzahoor545/Healthcare-Analytics-Project',
-    image: '', // Primary screenshot e.g. '/assets/projects/healthcare-1.png'
+    image: '/assets/projects/healthcare-1.png',
     images: [
       '/assets/projects/healthcare-1.png',
       '/assets/projects/healthcare-2.png',
       '/assets/projects/healthcare-3.png',
+      '/assets/projects/healthcare-4.png',
     ],
     build: [
-      'Designed, enhanced, and maintained interactive Power BI dashboards across healthcare operational domains, transforming static spreadsheets into centralized clinical KPI scorecards.',
+      'Designed, enhanced, and maintained interactive Power BI and Tableau dashboards across healthcare operational domains, transforming static spreadsheets into centralized clinical KPI scorecards.',
       'Applied SQL CTEs and window functions on healthcare records to calculate average patient wait times, triage throughput, and facility bed-occupancy velocity.',
       'Configured role-based security and HIPAA-compliant data views, enabling department heads and administrators to monitor service bottlenecks in real time.',
     ],
@@ -175,8 +177,8 @@ export const projects: Project[] = [
       'Clinical patient admission & discharge velocity tracking',
       'Departmental bed occupancy & resource heatmaps',
       'Wait-time bottleneck diagnostics across triage stages',
-      'Interactive Power BI multi-domain reporting suite',
-      'Automated refresh workflows from operational healthcare records',
+      'Tableau & Power BI multi-domain reporting suite',
+      'Automated daily refresh from hospital operational data',
     ],
     metrics: [
       { value: '15+', label: 'clinical KPIs tracked' },
@@ -189,37 +191,38 @@ export const projects: Project[] = [
   },
   {
     id: 'ibm-hr-analytics',
-    title: 'IBM HR Analytics: Employee Attrition & Workforce Trends',
+    title: 'IBM HR Analytics & Employee Attrition Analysis',
     year: '2024',
-    genre: 'HR Analytics • Tableau & MySQL • Workforce Trends',
-    logline: 'End-to-end HR analytics project diagnosing employee turnover drivers, salary benchmarks, and retention risks across departments using Python, MySQL, and Tableau.',
-    stack: ['Excel', 'Python', 'MySQL', 'Tableau', 'EDA'],
+    genre: 'HR Analytics • Workforce Retention • MySQL & Tableau',
+    logline: 'Analyzed employee attrition patterns, compensation benchmarks, and career progression across workforce cohorts using Python, MySQL, and Tableau.',
+    stack: ['Python', 'MySQL', 'Tableau', 'Power BI', 'Excel', 'EDA'],
     github: 'https://github.com/rayaanzahoor545/IBM-HR-Analytics-Employee-Attrition-Analysis',
-    image: '', // Primary screenshot e.g. '/assets/projects/hr-analytics-1.png'
+    image: '/assets/projects/hr-analytics-1.png',
     images: [
       '/assets/projects/hr-analytics-1.png',
       '/assets/projects/hr-analytics-2.png',
       '/assets/projects/hr-analytics-3.png',
+      '/assets/projects/hr-analytics-4.png',
     ],
     build: [
-      'Analyzed 1,470 employee records across 35 variables using Python and MySQL to evaluate employee attrition, satisfaction scores, and workforce distribution.',
-      'Engineered SQL queries and CTEs to segment attrition by department, education field, overtime status, and salary hike percentages, revealing key turnover drivers.',
-      'Built an interactive Tableau dashboard visualizing attrition rate KPIs, salary disparities, and tenure correlations, providing actionable retention strategies.',
+      'Conducted end-to-end exploratory data analysis (EDA) on IBM HR workforce records to identify key drivers of employee turnover, attrition rates, and retention factors.',
+      'Applied MySQL relational queries, CTEs, and aggregations to examine correlations between overtime hours, salary hikes, commute distance, and voluntary attrition.',
+      'Constructed interactive Tableau and Power BI dashboards featuring attrition heatmaps, demographic breakdowns, job role satisfaction scorecards, and flight-risk alerts.',
     ],
     features: [
-      '1,470 employee records analyzed across 35 workforce attributes',
-      'MySQL database queries & CTEs for attrition segmentation',
-      'Python exploratory data analysis (EDA) & correlation modeling',
-      'Interactive Tableau executive workforce & retention dashboard',
-      'Departmental salary parity & overtime impact analysis',
+      'Workforce demographic & attrition risk segmentation',
+      'Overtime, compensation & job satisfaction correlation analysis',
+      'Interactive Tableau & Power BI HR intelligence scorecards',
+      'MySQL queries for workforce retention & tenure tracking',
+      'Actionable HR talent retention & turnover reduction strategies',
     ],
     metrics: [
-      { value: '1,470', label: 'employee records analyzed' },
-      { value: '35+', label: 'workforce variables evaluated' },
-      { value: 'Tableau', label: 'interactive executive dashboard' },
-      { value: 'MySQL', label: 'structured queries & EDA' },
+      { value: '1,470', label: 'workforce records analyzed' },
+      { value: '16.1%', label: 'attrition rate quantified' },
+      { value: '35+', label: 'HR metrics & KPIs tracked' },
+      { value: 'MySQL+BI', label: 'relational analysis pipeline' },
     ],
-    palette: { from: '#1a0826', via: '#5a1380', to: '#0c0412', accent: '#d264ff' },
+    palette: { from: '#1a0826', via: '#531b7d', to: '#09050d', accent: '#c084fc' },
     motif: 'tenants',
   },
 ];
@@ -511,9 +514,9 @@ export const seasons: Season[] = [
       },
       {
         code: 'S04 E04',
-        title: 'IBM HR Attrition Analytics',
-        description: 'Workforce analytics across 1,470 employees diagnosing turnover drivers, overtime impact, and salary benchmarks.',
-        tags: ['Tableau', 'MySQL', 'HR Analytics', 'Workforce'],
+        title: 'IBM HR Analytics & Workforce Retention',
+        description: 'End-to-end employee attrition and compensation analysis using Python, MySQL, and Tableau across 1,470 workforce records.',
+        tags: ['HR Analytics', 'MySQL', 'Tableau', 'Workforce'],
         runtime: '2024',
         palette: violet,
       },
@@ -545,7 +548,8 @@ export const topPicks: TopPick[] = [
   { label: 'Supply Chain Original', title: 'Supply Chain Risk', detail: '1,000+ SKUs • 2h → <15m reporting turnaround', palette: crimson },
   { label: 'E-Commerce Original', title: 'Olist Analytics', detail: '99,441 orders • 112,650 order-item records', palette: violet },
   { label: 'Healthcare Original', title: 'Clinical Operations', detail: 'Patient throughput & bed occupancy analytics', palette: jade },
-  { label: 'Workforce Original', title: 'HR Analytics', detail: '1,470 records • Turnover drivers & Tableau dashboard', palette: violet },
+  { label: 'HR Analytics Original', title: 'IBM HR Analytics', detail: '1,470 records • MySQL, Python & Tableau attrition modeling', palette: violet },
+  { label: 'Cloud ETL Platform', title: 'Azure & AWS', detail: 'Data Factory • Synapse • AWS Glue • Athena', palette: ocean },
   { label: 'Manual Time Saved', title: '5–6 Hours / Week', detail: 'Automated KPI reporting at Enterprosys', palette: amber },
   { label: 'Data Quality Impact', title: '15–20% Reduction', detail: 'Fewer reported data discrepancies via validation', palette: jade },
   { label: 'IBM Credential', title: 'IBM SkillsBuild', detail: 'Data Analytics Fluency Pathway (6 micro-credentials)', palette: violet },
@@ -579,7 +583,7 @@ export const introSlides: IntroSlide[] = [
       'Supply Chain Risk Intelligence — 1,000+ SKUs, 2h to <15m turnaround',
       'E-Commerce Analytics — 99,441 orders & 112,650 items analyzed',
       'Healthcare Operations — Patient throughput & bed occupancy tracking',
-      'IBM HR Analytics — Workforce turnover drivers, overtime & salary benchmarks',
+      'IBM HR Attrition Analytics — Workforce retention & compensation modeling',
     ],
   },
   {
