@@ -28,10 +28,10 @@ export function PosterBackdrop({ palette, children, className = '' }: { palette:
 }
 
 /** Motif illustrations for each Original, built from the project's own architecture. */
-export function ProjectArt({ project, className = '' }: { project: Project; className?: string }) {
+export function ProjectArt({ project, className = '', motifOnly = false }: { project: Project; className?: string; motifOnly?: boolean }) {
   const [imgFailed, setImgFailed] = useState(false);
   const a = project.palette.accent;
-  if (project.image && !imgFailed) {
+  if (!motifOnly && project.image && !imgFailed) {
     return (
       <div className={`relative h-full w-full overflow-hidden ${className}`}>
         <img
@@ -81,25 +81,32 @@ export function ProjectArt({ project, className = '' }: { project: Project; clas
         )}
         {project.motif === 'tenants' && (
           <g fill="none" stroke={a}>
-            {[0, 1, 2].map((r) =>
-              [0, 1, 2, 3].map((c) => (
-                <rect
-                  key={`${r}-${c}`}
-                  x={196 + c * 44}
-                  y={50 + r * 44}
-                  width="34"
-                  height="34"
-                  rx="7"
-                  strokeWidth="1.6"
-                  strokeOpacity={0.25 + ((r + c) % 3) * 0.25}
-                  fill={(r + c) % 4 === 0 ? a : 'none'}
-                  fillOpacity="0.25"
-                />
-              )),
-            )}
-            <path d="M188 200 h190" strokeWidth="2" strokeOpacity="0.7" />
-            <path d="M188 214 h190" strokeWidth="1" strokeOpacity="0.35" />
-            <path d="M188 228 h190" strokeWidth="1" strokeOpacity="0.2" />
+            {/* Workforce Analytics & Attrition Chart Motif */}
+            <g transform="translate(194 48)">
+              {/* Dashboard scorecard outline */}
+              <rect x="0" y="0" width="160" height="116" rx="12" strokeWidth="2" strokeOpacity="0.85" />
+              {/* Header metrics */}
+              <line x1="16" y1="20" x2="68" y2="20" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.9" />
+              <line x1="78" y1="20" x2="114" y2="20" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.4" />
+              {/* Analytics bar columns */}
+              <rect x="18" y="58" width="18" height="42" rx="3" fill={a} fillOpacity="0.35" strokeWidth="1.5" strokeOpacity="0.8" />
+              <rect x="44" y="42" width="18" height="58" rx="3" fill={a} fillOpacity="0.75" strokeWidth="1.5" strokeOpacity="0.9" />
+              <rect x="70" y="68" width="18" height="32" rx="3" fill={a} fillOpacity="0.25" strokeWidth="1.5" strokeOpacity="0.6" />
+              <rect x="96" y="50" width="18" height="50" rx="3" fill={a} fillOpacity="0.55" strokeWidth="1.5" strokeOpacity="0.8" />
+              <rect x="122" y="34" width="18" height="66" rx="3" fill={a} fillOpacity="0.85" strokeWidth="1.5" strokeOpacity="0.95" />
+              {/* Trendline overlay with peak dot */}
+              <path d="M27 52 Q 53 32, 79 62 T 131 28" strokeWidth="2.5" strokeLinecap="round" stroke={a} />
+              <circle cx="131" cy="28" r="4" fill={a} />
+            </g>
+            {/* Cohort retention nodes below */}
+            <g transform="translate(176 196)" fill="none" stroke={a}>
+              <circle cx="16" cy="16" r="14" strokeWidth="2" strokeOpacity="0.8" />
+              <path d="M11 16 h10 M16 11 v10" strokeWidth="2" strokeLinecap="round" />
+              <path d="M30 16 h40" strokeWidth="2" strokeOpacity="0.5" />
+              <circle cx="86" cy="16" r="14" strokeWidth="2" strokeOpacity="0.8" />
+              <path d="M100 16 h40" strokeWidth="2" strokeOpacity="0.5" />
+              <circle cx="156" cy="16" r="14" strokeWidth="2" strokeOpacity="0.8" />
+            </g>
           </g>
         )}
       </svg>

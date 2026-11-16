@@ -52,7 +52,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
           {/* billboard */}
           <div className="relative h-[50vh] min-h-[320px] overflow-hidden sm:rounded-t-2xl">
             <motion.div layoutId={`art-${project.id}`} className="absolute inset-0" transition={{ duration: 0.7, ease: EASE }}>
-              <ProjectArt project={project} />
+              <ProjectArt project={project} motifOnly />
             </motion.div>
             <div className="absolute inset-0 bg-gradient-to-t from-ink-2 via-ink-2/30 to-transparent" />
             <button
@@ -107,6 +107,17 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               </motion.div>
             )}
 
+            {/* screenshots & dashboard gallery */}
+            <motion.section variants={block} className="mt-10">
+              <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+                <div>
+                  <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">Dashboard Previews & Visuals</h3>
+                  <p className="mt-1 text-xs text-mist">High-resolution interactive dashboards, workflows, and analytical outputs.</p>
+                </div>
+              </div>
+              <ProjectGallery project={project} />
+            </motion.section>
+
             {/* impact */}
             <motion.section variants={block} className="mt-12">
               <h3 className="mb-4 text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">Result / Impact</h3>
@@ -126,17 +137,6 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                   </motion.div>
                 ))}
               </div>
-            </motion.section>
-
-            {/* screenshots & dashboard gallery */}
-            <motion.section variants={block} className="mt-12">
-              <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
-                <div>
-                  <h3 className="text-[11px] font-bold uppercase tracking-[0.3em] text-crimson-2">Dashboard Previews & Visuals</h3>
-                  <p className="mt-1 text-xs text-mist">High-resolution interactive dashboards, workflows, and analytical outputs.</p>
-                </div>
-              </div>
-              <ProjectGallery project={project} />
             </motion.section>
 
             <div className="mt-12 grid gap-10 lg:grid-cols-[3fr_2fr]">
@@ -189,7 +189,7 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                     className="group relative aspect-video overflow-hidden rounded-xl text-left ring-1 ring-white/10 transition hover:ring-white/30"
                   >
                     <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
-                      <ProjectArt project={p} />
+                      <ProjectArt project={p} motifOnly />
                     </div>
                     <div className="absolute inset-x-0 bottom-0 p-4">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-mist">{p.genre}</p>

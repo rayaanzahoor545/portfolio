@@ -29,7 +29,7 @@ export default function ProjectCard({ project, index, onOpen }: { project: Proje
         >
           <motion.div layoutId={`art-${project.id}`} className="absolute inset-0 overflow-hidden rounded-2xl">
             <div className="absolute inset-0 transition-transform duration-[1.4s] ease-[var(--ease-cine)] group-hover:scale-[1.07]">
-              <ProjectArt project={project} />
+              <ProjectArt project={project} motifOnly />
             </div>
           </motion.div>
 
