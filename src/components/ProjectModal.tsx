@@ -91,8 +91,8 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
               {project.logline}
             </motion.p>
 
-            {project.github && (
-              <motion.div variants={block} className="mt-6 flex flex-wrap gap-3">
+            <motion.div variants={block} className="mt-6 flex flex-wrap gap-3">
+              {project.github && (
                 <Magnetic>
                   <a
                     href={project.github}
@@ -104,8 +104,19 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                     GitHub ↗
                   </a>
                 </Magnetic>
-              </motion.div>
-            )}
+              )}
+              <Magnetic>
+                <a
+                  href={`https://wa.me/923325011274?text=${encodeURIComponent(`Hi Rayaan, I reviewed your project "${project.title}" on your portfolio and would like to discuss it.`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="link"
+                  className="flex min-h-12 items-center gap-2 rounded-md border border-[#25D366]/40 bg-[#25D366]/15 px-6 text-[15px] font-bold text-[#25D366] transition hover:bg-[#25D366] hover:text-white"
+                >
+                  <span>💬</span> WhatsApp Rayaan
+                </a>
+              </Magnetic>
+            </motion.div>
 
             {/* screenshots & dashboard gallery */}
             <motion.section variants={block} className="mt-10">
@@ -138,6 +149,39 @@ export default function ProjectModal({ project, onClose, onSwitch }: { project: 
                 ))}
               </div>
             </motion.section>
+
+            {/* Business Outcomes & Value Delivered */}
+            {project.outcomes && project.outcomes.length > 0 && (
+              <motion.section variants={block} className="mt-12 rounded-2xl bg-gradient-to-br from-ink via-ink-2 to-black p-6 ring-1 ring-white/10 sm:p-8">
+                <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#46e3a8]">Business Value Delivered</span>
+                    <h3 className="mt-1 font-display text-2xl tracking-wide text-bone sm:text-3xl">Project Outcomes & Benefits</h3>
+                  </div>
+                  <span className="rounded-full border border-[#46e3a8]/30 bg-[#46e3a8]/10 px-3 py-1 text-xs font-semibold text-[#46e3a8]">
+                    Key Business Benefits
+                  </span>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {project.outcomes.map((outcome, idx) => {
+                    const hasColon = outcome.includes(':');
+                    const heading = hasColon ? outcome.split(':')[0] : `Outcome ${idx + 1}`;
+                    const body = hasColon ? outcome.substring(outcome.indexOf(':') + 1).trim() : outcome;
+                    return (
+                      <div key={idx} className="relative flex items-start gap-3.5 rounded-xl bg-black/40 p-5 ring-1 ring-white/10 transition hover:ring-white/25">
+                        <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#46e3a8]/20 text-xs font-bold text-[#46e3a8]">
+                          ✓
+                        </span>
+                        <div>
+                          <h4 className="text-sm font-bold text-bone leading-snug">{heading.trim()}</h4>
+                          <p className="mt-1.5 text-xs leading-relaxed text-bone/75">{body}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.section>
+            )}
 
             <div className="mt-12 grid gap-10 lg:grid-cols-[3fr_2fr]">
               <motion.section variants={block}>

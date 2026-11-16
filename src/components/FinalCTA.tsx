@@ -15,6 +15,7 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
 
   const ctas = [
     { label: "Let's Connect", href: `mailto:${profile.email}?subject=${encodeURIComponent("Let's Connect / Analytical Opportunities")}`, primary: true, cursor: 'play' },
+    { label: 'WhatsApp', href: profile.links.whatsapp, whatsapp: true, cursor: 'link' },
     { label: 'LinkedIn', href: profile.links.linkedin, cursor: 'link' },
     { label: 'GitHub', href: profile.links.github, cursor: 'link' },
     { label: 'Email', href: `mailto:${profile.email}`, cursor: 'link' },
@@ -67,10 +68,15 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
                 rel={c.href.startsWith('http') ? 'noreferrer' : undefined}
                 data-cursor={c.cursor}
                 className={`flex min-h-12 items-center gap-2 rounded-full px-7 text-sm font-bold tracking-[0.12em] transition ${
-                  c.primary ? 'bg-crimson text-white shadow-[0_0_50px_rgba(229,19,43,0.5)] hover:bg-crimson-2' : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
+                  c.primary
+                    ? 'bg-crimson text-white shadow-[0_0_50px_rgba(229,19,43,0.5)] hover:bg-crimson-2'
+                    : c.whatsapp
+                      ? 'border border-[#25D366]/50 bg-[#25D366]/15 text-[#25D366] hover:bg-[#25D366] hover:text-white shadow-[0_0_30px_rgba(37,211,102,0.25)]'
+                      : 'border border-white/25 text-bone hover:border-bone hover:bg-white/10'
                 }`}
               >
                 {c.primary && <span>▶</span>}
+                {c.whatsapp && <span>💬</span>}
                 {c.label.toUpperCase()}
                 {!c.primary && <span className="text-mist">↗</span>}
               </a>
@@ -78,6 +84,18 @@ export default function FinalCTA({ onReplay }: { onReplay: () => void }) {
           </motion.div>
         ))}
       </motion.div>
+
+      <div className="relative mt-8 flex items-center justify-center gap-2 text-xs text-mist">
+        <span>Direct WhatsApp / Call:</span>
+        <a
+          href={profile.links.whatsapp}
+          target="_blank"
+          rel="noreferrer"
+          className="font-bold text-[#25D366] underline decoration-[#25D366]/40 underline-offset-4 hover:decoration-[#25D366]"
+        >
+          {profile.phone}
+        </a>
+      </div>
 
       <div className="relative mt-16 flex flex-wrap justify-center gap-6 text-xs font-semibold tracking-[0.24em] text-smoke">
         <button type="button" onClick={() => scrollTo(0, { offset: 0 })} className="hover:text-bone">

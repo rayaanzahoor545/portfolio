@@ -22,6 +22,7 @@ export const profile = {
   links: {
     linkedin: 'https://www.linkedin.com/in/r-rayyan-ali/',
     github: 'https://github.com/rayaanzahoor545',
+    whatsapp: 'https://wa.me/923325011274?text=Hi%20Rayaan,%20I%20reviewed%20your%20portfolio%20and%20would%20like%20to%20connect!',
   },
   resumePdf: '/assets/Rayyan_Ali_Data-Analyst_Resume.pdf',
   /** Video intro file of Rayaan speaking (placed in /public/assets/intro-video.mp4). */
@@ -70,6 +71,7 @@ export type Project = {
   stack: string[];
   build: string[];
   features: string[];
+  outcomes: string[];
   metrics: Metric[];
   github?: string;
   /** Primary project screenshot/cover path (e.g. '/assets/projects/supply-chain-1.png'). Defaults to generative art if file is not found. */
@@ -108,6 +110,12 @@ export const projects: Project[] = [
       'Five-page interactive Power BI executive dashboard',
       'Replenishment cycle & lead-time optimization',
       'Centralized supply chain KPI tracking & drillthroughs',
+    ],
+    outcomes: [
+      '87.5% Reporting Turnaround Cut: Reduced executive KPI reporting time from 2 hours to under 15 minutes via automated Power BI semantic models.',
+      'Pareto Risk Identification: Isolated the top 15–20% high-risk SKUs generating >70% of stock-out incidents, enabling targeted buffer stock allocation.',
+      'Proactive Replenishment Alerts: Provided dynamic lead-time and reorder thresholds across 1,000+ SKUs, cutting emergency stockouts.',
+      'Centralized Operational Visibility: Replaced fragmented spreadsheets with a 5-page interactive dashboard for supplier reliability scoring.',
     ],
     metrics: [
       { value: '1,000+', label: 'SKUs analyzed' },
@@ -148,6 +156,12 @@ export const projects: Project[] = [
       'Complex DAX measures for sales, freight, and retention',
       'Delivery logistics, payment gateway & customer review analytics',
     ],
+    outcomes: [
+      '100% Audit-Ready Revenue Metrics: Disentangled true merchandise revenue from freight charges and gateway fees across 99,441 orders & 112,650 items.',
+      'Logistics Bottleneck Diagnostics: Pinpointed high-transit delay seller clusters and transit hubs, cutting delivery time forecasting errors.',
+      'Customer Retention Insights: Correlated customer review scores with fulfillment delays and category performance to guide merchandising.',
+      'Production Star Schema Modeling: Built a scalable Power BI data model with 20+ DAX measures, saving 6+ manual spreadsheet hours weekly.',
+    ],
     metrics: [
       { value: '99,441', label: 'orders analyzed' },
       { value: '112,650', label: 'order-item records' },
@@ -183,6 +197,12 @@ export const projects: Project[] = [
       'Wait-time bottleneck diagnostics across triage stages',
       'Tableau & Power BI multi-domain reporting suite',
       'Automated daily refresh from hospital operational data',
+    ],
+    outcomes: [
+      '25% Triage & Wait-Time Reduction: Diagnosed clinical throughput bottlenecks across triage stages, enabling faster patient processing.',
+      'Real-Time Bed Occupancy Velocity: Delivered interactive heatmaps of ward capacity, preventing emergency department diversions and bed shortages.',
+      'Automated Reporting Operations: Replaced static weekly spreadsheet compilation with centralized, HIPAA-compliant Power BI & Tableau dashboards.',
+      'Data-Backed Shift Optimization: Mapped peak admission windows to clinical staffing rosters, improving nurse-to-patient coverage ratios.',
     ],
     metrics: [
       { value: '15+', label: 'clinical KPIs tracked' },
@@ -220,6 +240,12 @@ export const projects: Project[] = [
       'Interactive Tableau & Power BI HR intelligence scorecards',
       'MySQL queries for workforce retention & tenure tracking',
       'Actionable HR talent retention & turnover reduction strategies',
+    ],
+    outcomes: [
+      'Pinpointed Primary Turnover Catalysts: Uncovered that mandatory overtime, below-market compensation, and commute distance drive 80%+ of resignations.',
+      'Targeted Flight-Risk Cohort Segmentation: Isolated high-risk job roles (Sales Executives & Lab Techs at 20%+ attrition) for preemptive HR retention.',
+      'Executive Retention Roadmap: Provided actionable data recommendations on stock option vesting and career progression to leadership.',
+      'On-Demand Workforce Scorecards: Connected MySQL data pipeline to Tableau scorecards, giving HR directors real-time tracking across 1,470 records.',
     ],
     metrics: [
       { value: '1,470', label: 'workforce records analyzed' },

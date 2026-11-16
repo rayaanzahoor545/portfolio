@@ -95,7 +95,12 @@ export function ResumeSheet() {
         <div>
           <p className="text-[10px] font-bold tracking-[0.34em] text-smoke">STARRING</p>
           <h3 className="mt-1 font-display text-[clamp(1.9rem,4.4vw,3.2rem)] leading-[0.9] tracking-wide text-bone">{profile.fullName}</h3>
-          <p className="mt-1 text-xs text-mist">{profile.role} · {profile.location} · {profile.phone}</p>
+          <p className="mt-1 text-xs text-mist">
+            {profile.role} · {profile.location} ·{' '}
+            <a href={profile.links.whatsapp} target="_blank" rel="noreferrer" className="text-[#25D366] hover:underline">
+              {profile.phone} (WhatsApp ↗)
+            </a>
+          </p>
         </div>
         <div className="text-xs leading-relaxed text-mist sm:text-right">
           <a href={`mailto:${profile.email}`} className="block hover:text-bone">
@@ -103,6 +108,10 @@ export function ResumeSheet() {
           </a>
           <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-bone">
             LinkedIn ↗
+          </a>
+          {' · '}
+          <a href={profile.links.whatsapp} target="_blank" rel="noreferrer" className="text-[#25D366] hover:underline">
+            WhatsApp ↗
           </a>
           {' · '}
           <a href={profile.links.github} target="_blank" rel="noreferrer" className="hover:text-bone">
