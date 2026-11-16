@@ -20,7 +20,7 @@ export const profile = {
   phone: '+92 332 5011274',
   email: 'r.rayyanzahoor@gmail.com',
   links: {
-    linkedin: 'https://www.linkedin.com/in/rayyanzahoor',
+    linkedin: 'https://www.linkedin.com/in/r-rayyan-ali/',
     github: 'https://github.com/rayaanzahoor545',
   },
   resumePdf: '/assets/Rayyan_Ali_Data-Analyst_Resume.pdf',
