@@ -15,7 +15,7 @@ export const profile = {
   role: 'Data Analyst & BI Specialist',
   tagline: ['DATA ANALYST', 'BUSINESS INTELLIGENCE', 'PYTHON', 'SQL', 'POWER BI', 'Excel'],
   intro:
-    'A Data Analyst with nearly 3 years of experience in data analytics, business intelligence, and performance reporting across supply chain, healthcare, sales, HR, and e-commerce domains. Proficient in SQL, Python, Power BI, Tableau, and Advanced Excel, with hands-on experience in data modeling, ETL workflows, and cloud platforms (Azure & AWS). Passionate about transforming complex datasets into meaningful insights, developing interactive dashboards, and delivering data-driven solutions that improve reporting efficiency and support informed business decisions.',
+    'Data Analyst with nearly 3 years of experience in data analytics, business intelligence, and performance reporting across supply chain, healthcare, e-commerce, sales, HR and cloud data platforms (Azure & AWS).',
   location: 'Rawalpindi, Pakistan',
   phone: '+92 332 5011274',
   email: 'r.rayyanzahoor@gmail.com',
