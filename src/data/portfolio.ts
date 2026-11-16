@@ -124,7 +124,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'E-Commerce • Python EDA • Star Schema',
     logline: 'Analyzed 99,441 orders and 112,650 order-item records from Olist E-Commerce dataset using Python (Pandas), SQL, and Power BI.',
-    stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'DAX', 'Advanced Excel'],
+    stack: ['Python', 'Advanced Excel', 'SQL', 'Power BI', 'DAX', 'Pandas'],
     github: 'https://github.com/rayaanzahoor545/E-Commerce-Business-Intelligence-Performance-Analytics',
     image: '/assets/projects/ecommerce-1.png',
     images: [
@@ -163,7 +163,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Healthcare BI • Clinical KPIs • Tableau & Power BI',
     logline: 'Designed interactive Power BI and Tableau dashboards tracking patient throughput, bed occupancy, clinical wait times, and facility resource utilization.',
-    stack: ['Power BI', 'Tableau', 'SQL', 'Python', 'DAX', 'Advanced Excel'],
+    stack: ['Power BI', 'SQL', 'Python', 'DAX', 'Advanced Excel'],
     github: 'https://github.com/rayaanzahoor545/Healthcare-Analytics-Project',
     image: '/assets/projects/healthcare-1.png',
     images: [
@@ -253,7 +253,7 @@ export const achievements: Achievement[] = [
     id: 'data-quality',
     title: '15–20% Quality Boost',
     org: 'Validation & Systematic EDA',
-    detail: 'Delivered 10+ end-to-end analytics projects across 50K+ records, cutting stakeholder-reported data issues by 15–20%.',
+    detail: 'Delivered 10+ end-to-end analytics projects across 99K+ records, cutting stakeholder-reported data issues by 15–20%.',
     laurel: 'Data Reliability',
   },
   {
@@ -265,7 +265,7 @@ export const achievements: Achievement[] = [
   },
   {
     id: 'supply-chain-efficiency',
-    title: '2h → <15m Turnaround',
+    title: '2h → 15m Turnaround',
     org: 'Global Supply Chain Intelligence',
     detail: 'SQL Pareto risk analysis across 1,000+ SKUs, cutting executive reporting turnaround from 2 hours to under 15 minutes.',
     laurel: 'Turnaround Record',
@@ -373,7 +373,7 @@ export const skillCategories: SkillCategory[] = [
 export const skillEvidence: Record<string, string[]> = {
   'Power BI': ['15+ Enterprise Dashboards at Enterprosys', 'Global Supply Chain 5-page Dashboard', 'Olist E-Commerce Analytics', 'Healthcare Operations Scorecard'],
   DAX: ['Calculated columns & business measures', 'Revenue vs Freight segregation', 'Time-intelligence & KPI indicators'],
-  SQL: ['Enterprosys 50K+ record validation', 'Supply Chain SKU Pareto queries', 'CTEs, Window Functions & Stored Procedures'],
+  SQL: ['Enterprosys 99K+ record validation', 'Supply Chain SKU Pareto queries', 'CTEs, Window Functions & Stored Procedures'],
   Python: ['Olist 112K+ records EDA', 'Pandas data cleaning & metric validation', 'NumPy & Seaborn statistical plots'],
   'Advanced Excel': ['Power Query ETL pipelines', 'Pivot Tables & Power Pivot modeling', 'Dynamic Lookups'],
   Tableau: ['Healthcare & supply chain KPI dashboards', 'Interactive stakeholder reporting'],
@@ -464,16 +464,16 @@ export const seasons: Season[] = [
       {
         code: 'S03 E01',
         title: '15+ Executive Dashboards',
-        description: 'Designing interactive Power BI and Tableau dashboards across supply chain and healthcare, saving 5–6 hours weekly.',
-        tags: ['Power BI', 'Tableau', 'Enterprosys'],
+        description: 'Designing interactive Power BI and Tableau dashboards across Multiple Domains like Sales,Supply chain, Workforce and healthcare, saving 5–6 hours weekly.',
+        tags: ['Power BI', 'Tableau','Excel', 'Enterprosys'],
         runtime: 'Dec 2023 – Present',
         palette: crimson,
       },
       {
         code: 'S03 E02',
         title: 'Data Quality & Validation',
-        description: 'Analyzing 50K+ records with SQL and Python, reducing stakeholder-reported data quality issues by 15–20%.',
-        tags: ['Data Quality', '50K+ Records', 'SQL'],
+        description: 'Analyzing 99K+ records with SQL and Python, reducing stakeholder-reported data quality issues by 15–20%.',
+        tags: ['Data Quality', '99K+ Records', 'SQL'],
         runtime: '2024',
         palette: amber,
       },
@@ -594,7 +594,7 @@ export const introSlides: IntroSlide[] = [
   {
     kicker: 'Impact',
     title: 'Measurable Value',
-    lines: ['15–20% reduction in data-quality issues through systematic validation', '50K+ records analyzed per end-to-end project', 'Automated KPI tracking for executive decision-making'],
+    lines: ['15–20% reduction in data-quality issues through systematic validation', '99K+ records analyzed per end-to-end project', 'Automated KPI tracking for executive decision-making'],
   },
   {
     kicker: 'Certified',
